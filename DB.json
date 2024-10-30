@@ -1,0 +1,61 @@
+{
+  "users": [
+    {
+      "id": 1,
+      "username": "John Doe",
+      "email": "johndoe@example.com",
+      "password": "not  requiere",
+      "messagesGlobal": [
+        {
+          "id": "1",
+          "messageAll": [
+            {
+              "content": "Help me with math",
+              "role": "you"
+            },
+            {
+              "content": "Sure!",
+              "role": "AI"
+            },
+            {
+              "content": "Tell me what  you want me to do",
+              "role": "AI"
+            },
+            {
+              "content": "I'm having trouble with division. Could you help me with that?",
+              "role": "you"
+            },
+            {
+              "content": "I think I'm getting the hang of it. How about division? Any tips?",
+              "role": "you"
+            },
+            {
+              "content": "I've tried breaking it down into steps, but I'm still not getting the hang of it. Could you give me a step-by-step guide?",
+              "role": "AI"
+            },
+            {
+              "content": "Alright, let's break it down into steps. First, divide the dividend by the divisor: 10 ÷ 5 = 2",
+              "role": "AI"
+            },
+            {
+              "content": "Great, now let's find the remainder. To do this, multiply the quotient by the divisor and subtract it from the dividend: 2 × 5 = 10, then subtract that from 10: 10 - 10 = 0",
+              "role": "AI"
+            }
+          ]
+        }
+      ],
+      "tutorsGlobal": [
+        {
+          "name": "math",
+          "id": "1",
+          "image": "https://storage.vivago.ai/image/p_f88e26d0-7863-11ef-ae35-f271045b19aa.jpg?width=512",
+          "KNOWLEDGE": [
+            { "name": "calculo" },
+            { "name": "algebra" },
+            { "name": "trigonometria" }
+          ]
+        }
+      ]
+    }
+  ]
+}
