@@ -17,8 +17,6 @@
   --main-purple: #8b00ff;
   --main-purlple-2: #dda0dd;
   --main-3: #8b00ff;
-
-  /*#b388ff*/
 }
 
 @media (prefers-color-scheme: dark) {
@@ -33,65 +31,13 @@ html {
 }
 body {
   align-self: auto;
-  /* color: rgb(var(--foreground-rgb));
-  background: linear-gradient(
-      to bottom,
-      transparent,
-      rgb(var(--background-end-rgb))
-    )
-    rgb(var(--background-start-rgb)); */
 
-  /*
-  default
-  background: #aa076b;
-  background: -webkit-linear-gradient(
-    to right,
-    #61045f,
-    #aa076b
-  ); 
-  background: linear-gradient(
-    to right,
-    #61045f,
-    #aa076b
-  ); 
-
-  color: #8a0788; */
-
-  /*
-  BLUE-FADE
-  background: rgb(0, 0, 0);
-  background: linear-gradient(
-    90deg,
-    rgba(0, 0, 0, 1) 0%,
-    rgba(3, 3, 34, 1) 11%,
-    rgba(2, 2, 31, 1) 24%,
-    rgba(3, 3, 54, 1) 38%,
-    rgba(3, 14, 64, 1) 58%,
-    rgba(4, 16, 74, 1) 70%,
-    rgba(5, 17, 91, 1) 81%,
-    rgba(6, 18, 79, 1) 90%,
-    rgba(1, 13, 71, 1) 100%
-  );
-
-  color: rgba(5, 17, 91, 1); */
-
-  /* 
-  dark-mode
-  background-color: #000000;
-  background-color: #1c1c1e; 
-  color:white
-  */
   height: auto;
 }
 
 .default-bg {
-  /* background: #aa076b;
-  background: -webkit-linear-gradient(to right, #61045f, #aa076b);
-  background: linear-gradient(to right, #61045f, #aa076b);
-
-  color: #8a0788; */
-
   background: #5c033a;
+
   background: -webkit-linear-gradient(
     45deg,
     #1a011a,
@@ -103,28 +49,9 @@ body {
   background-size: cover;
   color: #8a0788;
   min-height: 100vh;
-
-  /* background: linear-gradient(270deg, #1a011a, #621745, #5c033a, #53133b);
-  background-size: 9000% 100%; */
-  /* animation: gradientAnimation 8s ease infinite; */
 }
-/* @keyframes gradientAnimation {
-  0% {
-    background-position: 0% 50%;
-  }
-  50% {
-    background-position: 100% 50%;
-  }
-  100% {
-    background-position: 0% 50%;
-  }
-} */
 
 .elements {
-  /* background: #78044b;
-  background: -webkit-linear-gradient(to left, #260226, #882462);
-  background: linear-gradient(to left, #260226, #882462); */
-
   background-color: rgba(0, 0, 0, 0.5);
 
   color: #fff;
@@ -252,17 +179,6 @@ pre code {
   color: #f8f8f2; /* Light text for better contrast on dark background */
 }
 .gradient-container {
-  /* background: #aa076b;  fallback for old browsers
-  background: -webkit-linear-gradient(
-    to right,
-    #61045f,
-    #aa076b
-  ); /* Chrome 10-25, Safari 5.1-6 
-  background: linear-gradient(to left, #61045f, #aa076b); */
-
-  /* background: #78044b;
-  background: -webkit-linear-gradient(to left, #260226, hwb(323 14% 47%));
-  background: linear-gradient(to left, #260226, #882462); */
   background: -webkit-linear-gradient(
     45deg,
     #1a011a,
@@ -322,7 +238,9 @@ pre code {
   }
   60% {
     background-position: 60% 80%;
-    background: linear-gradient(to center, #2d0158, rgb(255, 255, 255));
+    background: linear-gradient(to left, #2d0158, rgb(255, 255, 255));
+    /* background: linear-gradient(to center, #2d0158, rgb(255, 255, 255));
+ background: linear-gradient(to center, #2d0158, rgb(255, 255, 255)); */
     -webkit-background-clip: text;
   }
   80% {
@@ -356,7 +274,7 @@ pre code {
   }
   60% {
     background-position: 60% 80%;
-    background: linear-gradient(to center, #0e0158, rgb(255, 255, 255));
+    background: linear-gradient(to left, #0e0158, rgb(255, 255, 255));
     -webkit-background-clip: text;
   }
   80% {
@@ -390,7 +308,7 @@ pre code {
   }
   60% {
     background-position: 60% 80%;
-    background: linear-gradient(to center, #141314, rgb(255, 255, 255));
+    background: linear-gradient(to left, #141314, rgb(255, 255, 255));
     -webkit-background-clip: text;
   }
   80% {
@@ -678,11 +596,7 @@ pre code {
   background: rgb(136, 149, 168);
   border-radius: 1rem;
   margin-left: 1rem;
-  /* color:#64748b */
 }
-/* .skeleton-bg {
-  background-color: #64748b;
-} */
 
 .skeleton-text-header-2-message {
   width: 70%;
@@ -734,7 +648,7 @@ pre code {
   display: block;
   width: 85%;
   height: 7px;
-  /* background: rgba(51, 7, 42, 0.753); */
+
   background-color: transparent;
 
   position: absolute;
@@ -755,9 +669,7 @@ pre code {
 .text-conteiner {
   color: white;
   font-weight: bold;
-  /* background: linear-gradient(178.4deg, #272f3b 4.8%, #161c2b 86.7%); */
-  /* background-color: transparent; */
-  /* background: inherit; */
+
   padding: 1em 1.5em;
   font-size: 22px;
   border-radius: 2rem;
@@ -825,8 +737,7 @@ pre code {
   display: flex;
   justify-content: center;
   align-items: center;
-  /* 
-  background-color: #f0f0f0; */
+
   background-color: transparent;
   overflow: hidden;
   position: relative;
@@ -882,7 +793,7 @@ html {
 .Crop_Relative {
   position: relative;
   display: flex;
-  /* flex-direction: column; */
+
   gap: 1rem;
 
   justify-content: center;
@@ -891,8 +802,6 @@ html {
 }
 
 .ReactCrop {
-  /* max-width: 500px;
-  max-height: 90vh; */
   background-color: rgba(0, 0, 0, 0.4);
   max-width: 520px;
   max-height: 85vh;
@@ -903,9 +812,6 @@ html {
 }
 
 .hidden {
-  /* display: none; */
-
-  /* visibility: hidden; */
   opacity: 0;
 }
 
@@ -922,7 +828,7 @@ html {
 
 canvas {
   z-index: 9999;
-  /* width: 100%; */
+
   border-radius: 1rem;
 }
 
@@ -930,7 +836,7 @@ canvas {
   display: flex;
   justify-content: center;
   align-items: center;
-  /* max-width: 400px; */
+
   border-radius: 1rem;
 }
 
@@ -983,7 +889,7 @@ input[type="number"] {
 
 .custom-file-upload {
   display: block;
-  /* padding: 10px 20px; */
+
   background-color: #bebebe;
   color: rgb(0, 0, 0);
   cursor: pointer;
@@ -1093,28 +999,14 @@ input[type="number"] {
 }
 
 .style_message_you {
-  /* background: radial-gradient(circle, rgba(255, 255, 255, 0.1), #000000); */
   background: radial-gradient(circle, rgba(68, 68, 68, 0.512) 0%, #000000 90%);
 }
 
-/* .form_message textarea:f{
-
-} */
-
 .textarea-container {
-  /* transition: border 9ms ease-in; */
   transition: outline 9ms ease-in;
 }
 
 .textarea-container:focus-within {
-  /*border: 2.6px solid;  Adjust color as needed */
   outline: 2.8px solid; /* Inner-focused effect */
   outline-offset: -2.7px; /* Moves the outline inward */
 }
-
-/* .textarea-container textarea {
-  width: 100%;
-  border: none;
-  outline: none;
-  resize: none;
-} */

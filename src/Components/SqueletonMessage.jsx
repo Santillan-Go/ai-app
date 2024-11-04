@@ -18,7 +18,7 @@ const SqueletonMessage = forwardRef((props, ref) => {
   return (
     <div
       ref={ref}
-      className={` rounded-3xl shadow-2xl sm:w-full w-60 sm:max-w-sm h-auto p-6 ${getColorBG()} backdrop-blur-md border border-white/10  self-end space-y-4`}
+      className={` rounded-3xl shadow-2xl sm:w-full w-60 sm:max-w-sm h-auto p-6 ${getColorBG()} backdrop-blur-md border border-white-10  self-end space-y-4`}
     >
       {/* Header (simulating profile image or icon) */}
 

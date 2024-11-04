@@ -19,7 +19,7 @@ function Register() {
       <div
         className={`flex flex-col w-full sm:w-[35%] items-center mr-auto ml-auto    rounded-3xl shadow-2xl p-3 ${
           Theme.theme === "default" || Theme.theme === "blue fade"
-            ? "shadow-slate-950 bg-gray-light bg-opacity-15 backdrop-blur-md border border-white/10"
+            ? "shadow-slate-950 bg-gray-light bg-opacity-15 backdrop-blur-md border border-white-10"
             : "shadow-slate-700"
         } gap-6`}
       >

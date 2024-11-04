@@ -20,7 +20,7 @@ function GrettingNoIn() {
   //gradient-container
 
   return (
-    <article className="flex-1 flex  justify-center mt-1">
+    <article className="flex-1 flex  justify-center mt-1  basis-[90%]">
       <section className="wrapper sm:w-4/5 w-[90%]">
         <div class="inside">
           <div class="shiny"></div>

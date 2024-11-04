@@ -29,7 +29,7 @@ function UserNotLogIn() {
     window.addEventListener("load", setVhProperty);
   }, []);
   return (
-    <section className="h-screen-dynamic w-full flex flex-col justify-between p-2">
+    <section className="h-screen w-full flex flex-col justify-between p-2">
       <div className="flex justify-end gap-4">
         <Link
           className=" rounded-3xl p-1 font-medium text-xl text-gray-900  hover:text-gray-300  elements border border-black"

@@ -19,13 +19,13 @@ function CardTeacher({ id, name, image }) {
   return (
     <Link
       href={`/teacher/${id}`}
-      className={` ${getTextColor()} flex flex-col items-center gap-2  sm:w-[250px] sm:h-[275px] w-[130px]  hover:cursor-pointer container-image text-slate-300`}
+      className={` ${getTextColor()} flex flex-col items-center gap-2  sm:w-250px sm:h-275px w-130px  hover:cursor-pointer container-image text-slate-300`}
     >
       <div
         className={`${
           Theme.theme === "dark mode"
             ? `${Theme.children}`
-            : "bg-gray-light bg-opacity-15 backdrop-blur-md border border-white/10"
+            : "bg-gray-light bg-opacity-15 backdrop-blur-md border border-white-10"
         } w-full h-full p-1 sm:p-4 rounded-lg shadow-md overflow-hidden`}
       >
         <img
@@ -34,7 +34,7 @@ function CardTeacher({ id, name, image }) {
           alt=""
         />
 
-        <p className="font-semibold text-[16px] sm:text-[20px] text-center title-card">
+        <p className="font-semibold text-16px sm:text-20px text-center title-card">
           {name}
         </p>
       </div>

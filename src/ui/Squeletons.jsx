@@ -6,9 +6,9 @@ export const HeaderSqueleton = () => {
         bg-slate-400 rounded-3xl   flex flex-col gap-3 sm:gap-5 
     w-8/12 mt-0 ml-0  sm:w-1/3  sm:mt-0 sm:ml-0 p-2 pl-4  animate-pulse`}
       >
-        <p className=" skeleton-text w-[75%] skeleton skeleton-text-header-1"></p>
+        <p className=" skeleton-text w-75% skeleton skeleton-text-header-1"></p>
 
-        <p className=" skeleton-text skeleton w-[60%] skeleton-text-header-2"></p>
+        <p className=" skeleton-text skeleton w-60% skeleton-text-header-2"></p>
       </section>
 
       <div
@@ -21,10 +21,10 @@ export const HeaderSqueleton = () => {
 export const TutorsSqueleton = ({ fadeOut }) => {
   return (
     <article
-      className={`flex flex-wrap justify-center gap-[6px] sm:p-8 sm:gap-8 mt-6 mb-6 ${fadeOut} animate-pulse`}
+      className={`flex flex-wrap justify-center gap-6px sm:p-8 sm:gap-8 mt-6 mb-6 ${fadeOut} animate-pulse`}
     >
       <div
-        className={`  flex flex-col items-center gap-2  sm:w-[250px] sm:h-[275px] w-[130px]  hover:cursor-pointer  `}
+        className={`  flex flex-col items-center gap-2  sm:w-250px sm:h-275px w-130px  hover:cursor-pointer  `}
       >
         <div
           className={` bg-slate-400 w-full h-full p-2 sm:p-4 rounded-lg shadow-md flex flex-col gap-4`}
@@ -36,7 +36,7 @@ export const TutorsSqueleton = ({ fadeOut }) => {
       </div>
 
       <div
-        className={`  flex flex-col items-center gap-2  sm:w-[250px] sm:h-[275px] w-[130px]  hover:cursor-pointer  `}
+        className={`  flex flex-col items-center gap-2  sm:w-250px sm:h-275px w-130px  hover:cursor-pointer  `}
       >
         <div
           className={` bg-slate-400 w-full h-full p-2 sm:p-4 rounded-lg shadow-md flex flex-col gap-4`}
@@ -48,7 +48,7 @@ export const TutorsSqueleton = ({ fadeOut }) => {
       </div>
 
       <div
-        className={`  flex flex-col items-center gap-2  sm:w-[250px] sm:h-[275px] w-[130px]  hover:cursor-pointer  `}
+        className={`  flex flex-col items-center gap-2  sm:w-250px sm:h-275px w-130px  hover:cursor-pointer  `}
       >
         <div
           className={` bg-slate-400 w-full h-full p-2 sm:p-4 rounded-lg shadow-md flex flex-col gap-4`}
@@ -60,7 +60,7 @@ export const TutorsSqueleton = ({ fadeOut }) => {
       </div>
 
       <div
-        className={`  flex flex-col items-center gap-2  sm:w-[250px] sm:h-[275px] w-[130px]  hover:cursor-pointer  `}
+        className={`  flex flex-col items-center gap-2  sm:w-250px sm:h-275px w-130px  hover:cursor-pointer  `}
       >
         <div
           className={` bg-slate-400 w-full h-full p-2 sm:p-4 rounded-lg shadow-md flex flex-col gap-4`}
@@ -72,7 +72,7 @@ export const TutorsSqueleton = ({ fadeOut }) => {
       </div>
 
       <div
-        className={`  flex flex-col items-center gap-2  sm:w-[250px] sm:h-[275px] w-[130px]  hover:cursor-pointer  `}
+        className={`  flex flex-col items-center gap-2  sm:w-250px sm:h-275px w-130px  hover:cursor-pointer  `}
       >
         <div
           className={` bg-slate-400 w-full h-full p-2 sm:p-4 rounded-lg shadow-md flex flex-col gap-4`}

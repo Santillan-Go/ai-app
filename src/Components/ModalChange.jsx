@@ -18,7 +18,7 @@ function ModalChange({ Submit, value, show, Change, hidden }) {
   // const getColorBG = () => {
   //   if (Theme.theme === "default") return "gradient-container ";
   //   if (Theme.theme === "blue fade") return "blue-fade-bg ";
-  //   if (Theme.theme === "dark mode") return " bg-[#1c1c1e] ";
+  //   if (Theme.theme === "dark mode") return "  ";
   // };
 
   const getTextColor = () => {
@@ -32,7 +32,7 @@ function ModalChange({ Submit, value, show, Change, hidden }) {
     <div className={`background-modal ${show ? "block" : "hidden"}`}>
       <form
         onSubmit={Submit}
-        className={`fixed top-1/2 left-1/2 translate-x-[-50%] translate-y-[-50%] flex flex-col gap-4 w-80 p-4 rounded-3xl   bg-gray-light bg-opacity-15 backdrop-blur-md border border-white/10  text-main-white font-bold `}
+        className={`fixed top-1/2 left-1/2 translate-x-[-50%] translate-y-[-50%] flex flex-col gap-4 w-80 p-4 rounded-3xl   bg-gray-light bg-opacity-15 backdrop-blur-md border border-white-10  text-main-white font-bold   `}
       >
         <input
           type="text"

@@ -40,7 +40,7 @@ const FormMessage = forwardRef(function FormMessage(
   return (
     <form
       onSubmit={(event) => Submit(event)}
-      className="basis-[10%] flex sm:justify-center gap-[2px] items-center sm:gap-8 sm:pl-4 sm:pr-4 "
+      className="basis-[10%] flex sm:justify-center gap-2px items-center sm:gap-8 sm:pl-4 sm:pr-4 "
     >
       <div
         className={` bg-gray-medium  rounded-3xl self-end sm:self-auto basis-[80%] sm:basis-[60%] relative p-1 textarea-container
@@ -96,10 +96,10 @@ export default FormMessage;
 
 // <form
 //   onSubmit={(event) => Submit(event, id)}
-//   className="basis-[10%] flex justify-center items-center sm:gap-8 pl-4 pr-4 "
+//   className="basis-10% flex justify-center items-center sm:gap-8 pl-4 pr-4 "
 // >
 //   <div
-//     className={` bg-gray-medium  rounded-3xl basis-[60%] relative p-1 textarea-container
+//     className={` bg-gray-medium  rounded-3xl basis-60% relative p-1 textarea-container
 //      ${getColorBorder()} `}
 //   >
 //     <textarea
@@ -121,7 +121,7 @@ export default FormMessage;
 //           ? "Haz me cualquier pregunta..."
 //           : "ask me anything..."
 //       }
-//       className="outline-none  bg-gray-medium  rounded-3xl  pl-3  w-[94%] text-xl resize-none min-h-12 h-12 max-h-96  overflow-y-auto resize-vertical text-black self-end form_message placeholder:text-gray-500"
+//       className="outline-none  bg-gray-medium  rounded-3xl  pl-3  w-94% text-xl resize-none min-h-12 h-12 max-h-96  overflow-y-auto resize-vertical text-black self-end form_message placeholder:text-gray-500"
 //       rows={1}
 //       spellCheck="false" // Desactiva la verificación ortográfica
 //       autoCorrect="off" // Desactiva la corrección automática

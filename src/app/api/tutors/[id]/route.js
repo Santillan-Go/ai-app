@@ -5,8 +5,9 @@ const { validateTutorFound } = require("@/errors/Validations");
 const { getOneTutor } = require("@/lib/userRequest");
 const { NextResponse } = require("next/server");
 
-export const GET = async (req, { params: { id } }) => {
+export const GET = async (req, { params }) => {
   try {
+    const { id } = await params;
     await dbConnect();
     const foundTutor = await getOneTutor({ tutorID: id });
 

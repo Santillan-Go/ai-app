@@ -5,8 +5,9 @@ import { getMessagesByID } from "@/lib/userRequest";
 
 const { NextResponse } = require("next/server");
 
-export const GET = async (req, { params: { id } }) => {
+export const GET = async (req, { params }) => {
   try {
+    const { id } = await params;
     await dbConnect();
     validateId({ id, message: "id is requiered" });
     const messagesTutorID = await getMessagesByID({ chatID: id });

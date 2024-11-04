@@ -49,7 +49,7 @@ function Teachers({ userID }) {
   }
 
   return (
-    <article className="flex flex-wrap justify-center gap-[6px] sm:p-8 sm:gap-8 mt-10 sm:mt-6 mb-6">
+    <article className="flex flex-wrap justify-center gap-6px sm:p-8 sm:gap-8 mt-10 sm:mt-6 mb-6">
       {teachers.map((teacher) => (
         <CardTeacher
           key={teacher._id}

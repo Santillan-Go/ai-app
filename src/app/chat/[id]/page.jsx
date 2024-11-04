@@ -4,7 +4,8 @@ import { getServerSession } from "next-auth";
 import { redirect } from "next/navigation";
 import React from "react";
 
-async function ChatAI({ params: { id } }) {
+async function ChatAI({ params }) {
+  const { id } = await params;
   const session = await getServerSession(authOptions);
   if (!session?.user?.id) {
     redirect("/auth/signin");

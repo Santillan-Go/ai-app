@@ -21,8 +21,8 @@ function Message({ who, content, lastRef }) {
        
         ${
           who == "you" ? "self-start" : "self-end"
-        } sm:pl-2 rounded-3xl p-1  min-w-[100px] inline-block ${
-        who === "you" ? "max-w-[400px] p-4" : "max-w-[800px] p-3"
+        } sm:pl-2 rounded-3xl p-1  min-w-100px inline-block ${
+        who === "you" ? "max-w-400px p-4" : "max-w-800px p-3"
       }  
 
       ${
@@ -40,7 +40,7 @@ function Message({ who, content, lastRef }) {
        `}
       ref={lastRef}
     >
-      {/* <p className="w-max inline  text-[16px]">{content}</p> */}
+      {/* <p className="w-max inline  text-16px">{content}</p> */}
       <ReactMarkDown className={`   text-[16px]  flex flex-col gap-8  `}>
         {content}
       </ReactMarkDown>

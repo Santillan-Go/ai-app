@@ -44,7 +44,7 @@ function HeaderUser({ name }) {
         ${
           Theme.theme === "dark mode"
             ? `${Theme.children}`
-            : "bg-gray-light bg-opacity-15 backdrop-blur-md border border-white/10"
+            : "bg-gray-light bg-opacity-15 backdrop-blur-md border border-white-10"
         }
         bg-main-white rounded-3xl p-1  flex flex-col gap-2 sm:gap-5 
     w-8/12 mt-0 ml-0 sm:w-1/3  sm:mt-0 sm:ml-0`}

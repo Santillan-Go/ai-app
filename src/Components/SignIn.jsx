@@ -15,9 +15,9 @@ function SignIn() {
         Welcome Back! Sign In to Your Account
       </h1>
       <div
-        className={`flex flex-col  w-full sm:w-[35%] items-center mr-auto ml-auto mt-16 rounded-3xl gap-6  shadow-2xl p-3 ${
+        className={`flex flex-col  w-full sm:w-35% items-center mr-auto ml-auto mt-16 rounded-3xl gap-6  shadow-2xl p-3 ${
           Theme.theme === "default" || Theme.theme === "blue fade"
-            ? "shadow-slate-950 bg-gray-light bg-opacity-15 backdrop-blur-md border border-white/10"
+            ? "shadow-slate-950 bg-gray-light bg-opacity-15 backdrop-blur-md border border-white-10"
             : "shadow-slate-700"
         }`}
       >

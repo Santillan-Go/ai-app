@@ -10,8 +10,10 @@ import {
 } from "@/lib/userRequest";
 import { NextResponse } from "next/server";
 
-export const GET = async (req, { params: { id } }) => {
+export const GET = async (req, { params }) => {
   try {
+    const { id } = await params;
+
     await dbConnect();
     validateId({ id, message: "id is required" });
     const found = await getUserByID({ userID: id });

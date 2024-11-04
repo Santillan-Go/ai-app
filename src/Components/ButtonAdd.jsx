@@ -15,7 +15,7 @@ function ButtonAdd({ handleTutor }) {
   };
   return (
     <button
-      className={`${getColorBG()} flex justify-center items-center text-6xl  rounded-full  outline-none border-none  fixed bottom-[10px] left-[50%] translate-x-[-50%] w-14 h-14 `}
+      className={`${getColorBG()} flex justify-center items-center text-6xl  rounded-full  outline-none border-none  fixed bottom-10px left-50% -translate-x-50% w-14 h-14 `}
       onClick={handleTutor}
     >
       <AddCircleOutlineIcon

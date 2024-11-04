@@ -15,13 +15,13 @@ function ModalTutorAI({ Change, Submit, tutor, handleModal, modal, colorBG }) {
   }, [modal]);
 
   /*
-   backdrop-blur-md border border-white/10 rounded-lg p-4 */
+   backdrop-blur-md border border-white-10 rounded-lg p-4 */
   return (
     <div className={`background-modal ${modal ? `` : "hidden"} `}>
       <form
         onSubmit={Submit}
         className={`  ${colorBG()}  w-80 h-64   text-main-white flex flex-col gap-4 p-4  fixed top-1/3 left-1/2 
-    translate-x-[-50%] backdrop-blur-md border border-white/10 rounded-3xl `}
+    translate-x-[-50%] backdrop-blur-md border border-white-10 rounded-3xl `}
       >
         <input
           type="text"

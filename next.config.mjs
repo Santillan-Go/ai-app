@@ -1,9 +1,9 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  // experimental: {
-  //   instrumentationHook: false,
+  // webpack: (config) => {
+  //   // config.optimization.minimize = false;
+  //   return config;
   // },
-  optimizeCss: false,
 };
 
 export default nextConfig;

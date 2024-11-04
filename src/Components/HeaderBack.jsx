@@ -4,7 +4,7 @@ import authOptions from "@/lib/authOptions";
 import { getServerSession } from "next-auth";
 
 const getUserByID = async ({ userID }) => {
-  const response = await fetch(`http://localhost:4000/api/user/${userID}`, {
+  const response = await fetch(`${process.env.BASE_URL}/api/user/${userID}`, {
     cache: "no-store",
   });
 

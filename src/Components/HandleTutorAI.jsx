@@ -18,11 +18,11 @@ function HandleTutorAI() {
   */
   const getColorBG = () => {
     if (Theme.theme === "default")
-      return " bg-gray-light bg-opacity-15 backdrop-blur-md border border-white/10 ";
+      return " bg-gray-light bg-opacity-15 backdrop-blur-md border border-white-10 ";
     if (Theme.theme === "blue fade")
-      return " bg-gray-light bg-opacity-15 backdrop-blur-md border border-white/10 ";
+      return " bg-gray-light bg-opacity-15 backdrop-blur-md border border-white-10 ";
     if (Theme.theme === "dark mode")
-      return " bg-gray-light bg-opacity-15 backdrop-blur-md border border-white/10 ";
+      return " bg-gray-light bg-opacity-15 backdrop-blur-md border border-white-10 ";
   };
   return (
     <>

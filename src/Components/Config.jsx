@@ -19,7 +19,7 @@ function Config() {
     <article
       className={`${
         Theme.theme === "dark mode" ? `${Theme.children}` : ""
-      } p-2 sm:p-4 flex flex-col gap-7 sm:gap-14 w-full sm:w-[60%] shadow-mine-black rounded-3xl`}
+      } p-2 sm:p-4 flex flex-col gap-7 sm:gap-14 w-full sm:w-60% shadow-mine-black rounded-3xl`}
     >
       <NameUser
         buttonText={language.config.buttonText}

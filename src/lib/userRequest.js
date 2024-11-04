@@ -1,4 +1,3 @@
-import prisma from "./connectDB";
 import dbConnect from "./MongoDB";
 import { User, MessagesGlobal, TutorsGlobal } from "./Schema";
 
@@ -129,11 +128,6 @@ export const createUser = async ({ username, email, password, _id }) => {
 };
 
 export const registerUserWithOutPassword = async ({ email, username, _id }) => {
-  // const userFound = await prisma.user.findUnique({
-  //   where: {
-  //     email: email,
-  //   },
-  // });
   await dbConnect();
   const userFound = await User.findOne({
     email,
