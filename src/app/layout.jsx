@@ -23,6 +23,13 @@ export default async function RootLayout({ children }) {
   const session = await getServerSession(authOptions);
   return (
     <html lang="en">
+      <head>
+        <script
+          async
+          src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6335035765993896"
+          crossorigin="anonymous"
+        ></script>
+      </head>
       <ReduxProvider>
         <ProviderSession session={session}>
           <BodyLayout

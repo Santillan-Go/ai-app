@@ -105,6 +105,9 @@ const authOptions = {
       //   return null;
       // }
     },
+    async redirect({ url, baseUrl }) {
+      return baseUrl;
+    },
   },
   secret: process.env.NEXTAUTH_SECRET,
 };

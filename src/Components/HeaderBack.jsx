@@ -4,11 +4,18 @@ import authOptions from "@/lib/authOptions";
 import { getServerSession } from "next-auth";
 
 const getUserByID = async ({ userID }) => {
-  const response = await fetch(`${process.env.BASE_URL}/api/user/${userID}`, {
-    cache: "no-store",
-  });
+  try {
+    const response = await fetch(`${process.env.BASE_URL}/api/user/${userID}`, {
+      cache: "no-store",
+    });
 
-  return await response.json();
+    if (response.ok) {
+      return await response.json();
+    }
+    throw new Error("Failed to fetch user");
+  } catch (error) {
+    return "";
+  }
 };
 
 async function HeaderBack() {
