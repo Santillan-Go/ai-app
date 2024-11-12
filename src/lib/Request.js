@@ -1,4 +1,4 @@
-export const getUserByID = async ({ userID = "66f714cbbc5c047a046b13c7" }) => {
+export const getUserByID = async ({ userID }) => {
   const response = await fetch(`/api/user/${userID}`, {
     cache: "no-cache",
   });

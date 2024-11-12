@@ -5,11 +5,11 @@ import { useAppDispatch, useAppSelector } from "@/store/store";
 import { updateUsername } from "@/store/userRedux";
 import { useEffect } from "react";
 
-function HeaderUser({ name }) {
+function HeaderUser() {
   const language = useLanguage();
   const Theme = useTheme();
-  // const username = useAppSelector((state) => state.userRedux.username);
-  const dispatch = useAppDispatch();
+  const username = useAppSelector((state) => state.userRedux.username);
+  // const dispatch = useAppDispatch();
   const greetting = () => {
     const date = new Date();
     let hours = date.getHours();
@@ -32,11 +32,11 @@ function HeaderUser({ name }) {
       return language.gretting.timeDay[2];
     }
   };
-  useEffect(() => {
-    if (name) {
-      dispatch(updateUsername({ username: name }));
-    }
-  }, [name]);
+  // useEffect(() => {
+  //   if (name) {
+  //     dispatch(updateUsername({ username: name }));
+  //   }
+  // }, [name]);
 
   return (
     <section
@@ -53,7 +53,7 @@ function HeaderUser({ name }) {
         <p className="apply-spin inline-block text-2xl">👋</p>
         <h1 className="font-bold sm:text-2xl  wave-text">
           {language.spanish ? "HOLA" : "HI"},{" "}
-          {name ? name.toLocaleUpperCase() : "Loading..."}!
+          {username ? username.toLocaleUpperCase() : "Loading..."}!
         </h1>
       </div>
 

@@ -10,7 +10,7 @@ function BtnLogOut() {
   const dispatch = useAppDispatch();
   return (
     <button
-      className="p-2  text-2x1 text-center flex gap-2 bg-white text-black rounded-3xl "
+      className="p-2  text-2x1 text-center flex gap-2 w-44 bg-white text-black rounded-3xl "
       onClick={() => {
         signOut({ redirect: true, callbackUrl: "/" });
 

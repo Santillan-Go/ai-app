@@ -7,6 +7,9 @@ const {
   getAllUsers,
   getUserByEmail,
   deleteAllUsers,
+  createPlanSubcription,
+  deleteAllTutors,
+  deleteAllMessages,
 } = require("@/lib/userRequest");
 const { NextResponse } = require("next/server");
 
@@ -27,6 +30,8 @@ export const POST = async (req) => {
       );
     }
     const newUser = await createUser({ username, email, password, _id });
+
+    const planUser = await createPlanSubcription({ userID: _id });
 
     return NextResponse.json(newUser, { status: 201 }); // Created successfully
   } catch (error) {
@@ -54,6 +59,8 @@ export const DELETE = async () => {
   try {
     await dbConnect();
     const allOnes = await deleteAllUsers();
+    await deleteAllTutors();
+    await deleteAllMessages();
     return NextResponse.json(allOnes);
   } catch (error) {
     return NextResponse.json({ message: error.message });

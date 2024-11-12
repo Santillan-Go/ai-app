@@ -81,6 +81,13 @@ module.exports = {
       flexBasis: {
         "5/12": "41.666667%",
       },
+      textShadow: {
+        "black-lg": "2px 2px 5px rgba(0, 0, 0, 0.3)",
+        "blue-lg": "2px 2px 5px rgba(0, 0, 255, 0.3)",
+        "red-lg": "2px 2px 5px rgba(255, 0, 0, 0.3)",
+        "white-lg": "2px 2px 5px rgb(255, 255, 255)",
+        // Add more colors as needed
+      },
     },
 
     screens: {
@@ -89,5 +96,5 @@ module.exports = {
     },
   },
 
-  plugins: [],
+  plugins: [require("tailwindcss-textshadow")],
 };

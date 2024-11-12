@@ -15,6 +15,7 @@ import BtnGoToBottom from "./BtnGoToBottom";
 import useTextFromImage from "@/HOOKS/useTextFromImage";
 import UseImageCrop from "@/HOOKS/useImageCrop";
 import ModalmageText from "./ModalmageTex";
+import TokensChat from "./TokensChat";
 //create an array of messages
 // const array = Array(100).fill({
 //   content:
@@ -109,6 +110,7 @@ function UserMessage({ id }) {
     <section className="h-screen p-2 flex flex-col">
       <div className="flex justify-between ">
         <BackTo LINK={`/teacher/${id}`} />
+        <TokensChat />
       </div>
       {loading ? (
         <SkeletonLoader />

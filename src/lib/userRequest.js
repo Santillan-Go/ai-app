@@ -1,5 +1,5 @@
 import dbConnect from "./MongoDB";
-import { User, MessagesGlobal, TutorsGlobal } from "./Schema";
+import { User, MessagesGlobal, TutorsGlobal, Subscription } from "./Schema";
 
 //GET-READ
 
@@ -52,6 +52,14 @@ export const getMessagesByID = async ({ chatID }) => {
   return foundOne;
 };
 
+export const getSubscriptionsByIdUser = async ({ userID }) => {
+  const allUsers = await Subscription.findOne({ userID });
+  return allUsers;
+};
+export const getSubscriptionsUser = async () => {
+  const allUsers = await Subscription.find();
+  return allUsers;
+};
 //CREATE
 export const createNewTutor = async ({
   userID,
@@ -142,6 +150,7 @@ export const registerUserWithOutPassword = async ({ email, username, _id }) => {
       // optional if password is not required
     });
     const response = await newOne.save();
+    await createPlanSubcription({ userID: _id });
 
     console.log(response, "NEW ONE");
     return { ...response, user: true };
@@ -181,6 +190,21 @@ export const createNewMessagesGlobal = async ({
   }
 };
 
+export const createPlanSubcription = async ({ userID }) => {
+  try {
+    const newPlanSub = await Subscription.create({
+      planName: "Free",
+      userID,
+      stripe_plan_id: "free_plan_43522_22",
+      startDate: "never",
+      endDate: "never",
+    });
+    console.log(newPlanSub);
+  } catch (error) {
+    console.log({ messagError: error.message });
+  }
+};
+
 //UPDATE
 export const updateKnowledge = async ({
   tutorID,
@@ -207,11 +231,36 @@ export const updateKnowledge = async ({
   }
 };
 
+export const updateUserSubcription = async ({
+  planName,
+  stripe_plan_id,
+  userID,
+}) => {
+  // stripe_plan_id
+  const updatedSubcription = await Subscription.updateOne(
+    { _id: userID }, // filter
+    {
+      $set: {
+        planName,
+        stripe_plan_id,
+      },
+    }
+  );
+
+  console.log(updatedSubcription);
+};
+
 export const updateUsername = async ({ userID, username }) => {
-  const updatedName = await User.updateOne({
-    _id: userID,
-    username,
-  });
+  const updatedName = await User.updateOne(
+    {
+      _id: userID,
+    },
+    {
+      $set: {
+        username,
+      },
+    }
+  );
 
   return updatedName;
 };
@@ -258,4 +307,14 @@ export const deleteAllUsers = async () => {
   const deletedAllUsers = await User.deleteMany();
 
   return deletedAllUsers;
+};
+
+export const deleteAllTutors = async () => {
+  const deletedAllTutors = await TutorsGlobal.deleteMany();
+  return deletedAllTutors;
+};
+
+export const deleteAllMessages = async () => {
+  const deletedAllMessages = await MessagesGlobal.deleteMany();
+  return deletedAllMessages;
 };

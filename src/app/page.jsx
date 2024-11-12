@@ -15,7 +15,7 @@ async function page() {
   console.log(session, "LAYOUT");
   //sm:before:p-4
   return (
-    <section className="">
+    <section>
       {session?.user?.name ? (
         <section className="p-2">
           <div className="flex justify-between pt-4 pl-4 pr-4">

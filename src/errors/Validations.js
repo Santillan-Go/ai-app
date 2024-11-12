@@ -94,3 +94,63 @@ export const validateTutorFound = ({ foundOne }) => {
     throw new ValidateFound("Tutor not found");
   }
 };
+
+export const validatePlan = ({
+  img,
+  price,
+  isNew,
+  benefits,
+  limitations,
+  name,
+  max_queries,
+  trial_period_days,
+  is_active,
+  billing_interval,
+  cancellation_policy,
+  access_level,
+  description,
+  currency,
+}) => {
+  if (!img) {
+    throw new ValidationError("Image is required");
+  }
+  if (typeof price === "undefined" || price === null || price < 0) {
+    throw new ValidationError("Price is required");
+  }
+  if (!name) {
+    throw new ValidationError("Name is required");
+  }
+  if (!description) {
+    throw new ValidationError("Description is required");
+  }
+  if (!currency) {
+    throw new ValidationError("Currency is required");
+  }
+  if (!access_level) {
+    throw new ValidationError("Access level is required");
+  }
+  // if (!trial_period_days) {
+  //   throw new ValidationError("Trial period days is required");
+  // }
+  if (typeof is_active === "undefined" || is_active === null) {
+    throw new ValidationError("Is active is required");
+  }
+  if (!billing_interval) {
+    throw new ValidationError("Billing interval is required");
+  }
+  // if (!cancellation_policy) {
+  //   throw new ValidationError("Cancellation policy is required");
+  // }
+  if (!max_queries) {
+    throw new ValidationError("Max queries is required");
+  }
+  if (!benefits) {
+    throw new ValidationError("Benefits is required");
+  }
+  if (!limitations) {
+    throw new ValidationError("Limitations is required");
+  }
+  if (typeof isNew === "undefined" || isNew === null) {
+    throw new ValidationError("Is new is required");
+  }
+};

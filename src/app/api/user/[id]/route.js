@@ -5,6 +5,7 @@ import {
   deleteMessagesByUserID,
   deleteTutorByUserID,
   deleteUserByID,
+  getSubscriptionsByIdUser,
   getUserByID,
   updateUsername,
 } from "@/lib/userRequest";
@@ -21,8 +22,18 @@ export const GET = async (req, { params }) => {
     if (!found) {
       return NextResponse.json({ message: "User not found" }, { status: 404 });
     }
+    const subcriptionUser = await getSubscriptionsByIdUser({ userID: id });
+    const userFound = {
+      username: found._doc.username,
+      _id: found._doc._id,
+      email: found._doc.email,
+    };
+    return NextResponse.json({
+      ...userFound,
 
-    return NextResponse.json(found);
+      planName: subcriptionUser.planName,
+      stripe_plan_id: subcriptionUser.stripe_plan_id,
+    });
   } catch (error) {
     if (error instanceof ValidationError) {
       return NextResponse.json({ message: error.message }, { status: 400 });

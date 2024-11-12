@@ -6,6 +6,7 @@ import { getServerSession } from "next-auth";
 import authOptions from "@/lib/authOptions";
 
 import { ProviderSession } from "@/Components/ProviderSession";
+import GetInfoUser from "@/Components/GetInfoUser";
 
 // const inter = Inter({ subsets: ["latin", ""] });
 export const montserratAlternates = Montserrat_Alternates({
@@ -30,8 +31,10 @@ export default async function RootLayout({ children }) {
           crossorigin="anonymous"
         ></script>
       </head>
+
       <ReduxProvider>
         <ProviderSession session={session}>
+          <GetInfoUser />
           <BodyLayout
             children={children}
             montserratAlternates={montserratAlternates}

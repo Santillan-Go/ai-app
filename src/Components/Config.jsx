@@ -7,6 +7,8 @@ import useLanguage from "@/HOOKS/useLanguage";
 import { useAppSelector } from "@/store/store";
 import BtnLogOut from "./BtnLogOut";
 import useTheme from "@/HOOKS/useTheme";
+import Link from "next/link";
+import GoToPlan from "./GoToPlan";
 
 function Config() {
   const language = useLanguage();
@@ -19,7 +21,7 @@ function Config() {
     <article
       className={`${
         Theme.theme === "dark mode" ? `${Theme.children}` : ""
-      } p-2 sm:p-4 flex flex-col gap-7 sm:gap-14 w-full sm:w-60% shadow-mine-black rounded-3xl`}
+      } p-2 sm:p-4 flex flex-col gap-7 sm:gap-11 w-full sm:w-60% shadow-mine-black rounded-3xl`}
     >
       <NameUser
         buttonText={language.config.buttonText}
@@ -45,8 +47,17 @@ function Config() {
         />
       </div>
 
-      <div className="flex justify-center items-center">
-        <BtnLogOut />
+      <div className="flex flex-col gap-2  ">
+        <GoToPlan from="config" />
+        {/* <Link
+          href={"/plans"}
+          className=" w-44 text-black rounded-3xl p-1 text-xl font-semibold bg-slate-100 upgrade_btn_wave "
+        >
+          Upgrade✨
+        </Link> */}
+        <div className="w-full flex justify-center">
+          <BtnLogOut />
+        </div>
       </div>
     </article>
   );
