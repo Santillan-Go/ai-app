@@ -1,6 +1,5 @@
 import Stripe from "stripe";
 import { NextResponse } from "next/server";
-import { Subscription } from "@/lib/Schema";
 
 const stripe = new Stripe(process.env.STRIPE_SECRET_KEY);
 
