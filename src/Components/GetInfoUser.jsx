@@ -4,6 +4,7 @@ import { useAppDispatch, useAppSelector } from "@/store/store";
 import {
   updateEndDate,
   updatePlanName,
+  updateSubID,
   updateUsername,
 } from "@/store/userRedux";
 
@@ -33,6 +34,7 @@ function GetInfoUser() {
     dispatch(updatePlanName({ planName: result.planName }));
 
     dispatch(updateEndDate({ endDate: result.endDate }));
+    dispatch(updateSubID({ subID: result.subID }));
 
     //UPDATE THE STATE
     //SET A GLOBAL LOADING STATE TO SHOW THE SKELETON

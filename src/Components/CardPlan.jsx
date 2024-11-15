@@ -13,6 +13,8 @@ function CardPlan({ plan }) {
   const currentPlan = useAppSelector((state) => state.userRedux.planName);
 
   const endDate = useAppSelector((state) => state.userRedux.endDate);
+  const subID = useAppSelector((state) => state.userRedux.subID);
+
   // const currentPlan = "Free";
   const handlePurchase = async () => {
     const res = await fetch(`/api/stripe/checkout`, {
@@ -46,7 +48,7 @@ function CardPlan({ plan }) {
         "Content-Type": "application/json",
       },
       body: JSON.stringify({
-        subID: plan.subID,
+        subID,
         userID,
         endDate,
       }),

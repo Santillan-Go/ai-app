@@ -3,7 +3,7 @@ import { NextResponse } from "next/server";
 import Stripe from "stripe";
 
 const stripe = new Stripe(process.env.STRIPE_SECRET_KEY);
-export const POST = async () => {
+export const POST = async (req) => {
   const { subID, endDate, userID } = await req.json();
 
   try {
@@ -27,6 +27,7 @@ export const POST = async () => {
       url: `/plans/cancel?endDate=${endDate}`,
     });
   } catch (error) {
+    console.log({ message: error.message });
     return NextResponse.json({ message: error.message }, { status: 500 });
   }
 };

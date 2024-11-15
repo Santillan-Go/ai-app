@@ -4,6 +4,7 @@ const initial = {
   username: "",
   planName: "Free",
   endDate: "",
+  subID: "",
 };
 
 const userSlice = createSlice({
@@ -19,10 +20,13 @@ const userSlice = createSlice({
     updateEndDate(state, action) {
       state.endDate = action.payload.endDate;
     },
+    updateSubID(state, action) {
+      state.subID = action.payload.subID;
+    },
   },
 });
 
-export const { updateUsername, updatePlanName, updateEndDate } =
+export const { updateUsername, updatePlanName, updateEndDate, updateSubID } =
   userSlice.actions;
 
 export const userRedux = userSlice.reducer;
