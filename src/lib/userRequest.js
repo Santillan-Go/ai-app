@@ -235,14 +235,41 @@ export const updateUserSubcription = async ({
   planName,
   stripe_plan_id,
   userID,
+  subID,
 }) => {
+  const startDate = new Date();
+
+  // Set the end date to one month from the start date
+  const endDate = new Date(startDate);
+  endDate.setMonth(startDate.getMonth() + 1);
+
+  console.log("Start Date:", startDate.toISOString());
+  console.log("End Date:", endDate.toISOString());
   // stripe_plan_id
   const updatedSubcription = await Subscription.updateOne(
-    { _id: userID }, // filter
+    { userID }, // filter
     {
       $set: {
         planName,
         stripe_plan_id,
+        subID,
+        startDate: startDate.toISOString().split("T")[0],
+        endDate: endDate.toISOString().split("T")[0],
+        active: true, // Set the active status to true to indicate the user is active
+      },
+    }
+  );
+
+  console.log(updatedSubcription);
+};
+
+export const cancelUserSubcription = async ({ userID }) => {
+  // stripe_plan_id
+  const updatedSubcription = await Subscription.updateOne(
+    { userID }, // filter
+    {
+      $set: {
+        active: false,
       },
     }
   );

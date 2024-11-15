@@ -46,6 +46,8 @@ const SubscriptionSchema = new Schema({
   startDate: { type: String, required: true },
   endDate: { type: String, required: true },
   stripe_plan_id: { type: String, required: true },
+  subID: { type: String, required: false },
+  active: { type: Boolean, required: false },
 });
 
 const PlansSubscriptionSchema = new Schema(

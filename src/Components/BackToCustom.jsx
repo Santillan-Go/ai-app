@@ -11,7 +11,7 @@ function BackToCustom() {
   const handleGoBack = () => {
     if (referrer === "config") {
       return "/config";
-    } else if (referrer.includes("chat")) {
+    } else if (referrer && referrer.includes("chat")) {
       //IMPROVE THIS ONE-------
       return referrer;
     } else {

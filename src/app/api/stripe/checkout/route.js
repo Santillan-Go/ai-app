@@ -19,6 +19,7 @@ export const POST = async (request) => {
       metadata: {
         userID,
         name,
+        stripe_plan_id: planId,
       },
       success_url: `${process.env.BASE_URL}/success`,
       cancel_url: `${process.env.BASE_URL}/plans`,

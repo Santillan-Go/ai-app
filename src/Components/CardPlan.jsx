@@ -11,6 +11,9 @@ function CardPlan({ plan }) {
   //console.log({ planId: plan.stripe_plan_id, name: plan.name });
   const userID = session?.user?.id || "";
   const currentPlan = useAppSelector((state) => state.userRedux.planName);
+
+  const endDate = useAppSelector((state) => state.userRedux.endDate);
+  // const currentPlan = "Free";
   const handlePurchase = async () => {
     const res = await fetch(`/api/stripe/checkout`, {
       method: "POST",
@@ -32,7 +35,65 @@ function CardPlan({ plan }) {
     const json = await res.json();
     router.push(json.url);
   };
+
+  const handleCancel = async () => {
+    // alert("Canceling plan");
+    // cancel the subscription
+    // call to api
+    const response = await fetch(`/api/stripe/cancel`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        subID: plan.subID,
+        userID,
+        endDate,
+      }),
+    });
+    if (!response.ok) return false;
+
+    const json = await response.json();
+    const { url } = json;
+    router.push(url);
+  };
+
+  const validatePlanPay = () => {
+    const moneyPlan = ["Pro", "Standard"];
+    return moneyPlan.includes(currentPlan);
+  };
+
+  const CheckCurrentPlan = () => {
+    if (validatePlanPay()) {
+      /*
+current:true
+disabled:true
+*/
+      return {
+        current: currentPlan.includes(plan.name),
+        disabled: true,
+        money: true,
+      };
+      //disabled other and add current
+      //IF IT IS PRO OR STANDARD I'M GOING TO CALL THE CURRENT "CANCEL", AND DISABLED THE OTHERS
+    } else {
+      //enable other
+      // THI IS FOR FREE PLAN, I'M GONNA ALLOW THE OTHER BUTTONS TO BE CLICK
+      return {
+        current: currentPlan.includes(plan.name),
+        disabled: false,
+        money: false,
+      };
+
+      /*
+    current:true
+    disabled:false
+    */
+    }
+  };
   //plan.prices[0].id
+  const { current, disabled, money } = CheckCurrentPlan();
+  // console.log({ current, name: plan.name, money });
   return (
     <div
       key={plan.id}
@@ -76,13 +137,13 @@ function CardPlan({ plan }) {
               </div>
             ))}
         </section>
-
+        {/* !current && !money */}
         <button
-          onClick={handlePurchase}
-          disabled={currentPlan.includes(plan.name) ? true : false}
+          onClick={money ? handleCancel : handlePurchase}
+          disabled={money ? (current ? false : true) : current ? true : false}
           className="w-4/5 py-2 rounded-2xl border border-slate-300 hover:bg-opacity-70 hover:text-white hover:font-semibold hover:shadow-md transition-all duration-200 justify-items-end disabled:font-normal disabled:bg-opacity-100  disabled:text-gray-500  disabled:border-slate-500"
         >
-          {currentPlan.includes(plan.name) ? "Current" : "Buy"}
+          {money ? (current ? "Cancel" : "Buy") : current ? "Current" : "Buy"}
         </button>
       </div>
     </div>
@@ -90,3 +151,12 @@ function CardPlan({ plan }) {
 }
 
 export default CardPlan;
+{
+  /* <button
+          onClick={handlePurchase}
+          disabled={currentPlan.includes(plan.name) ? true : false}
+          className="w-4/5 py-2 rounded-2xl border border-slate-300 hover:bg-opacity-70 hover:text-white hover:font-semibold hover:shadow-md transition-all duration-200 justify-items-end disabled:font-normal disabled:bg-opacity-100  disabled:text-gray-500  disabled:border-slate-500"
+        >
+          {currentPlan.includes(plan.name) ? "Current" : "Buy"}
+        </button> */
+}

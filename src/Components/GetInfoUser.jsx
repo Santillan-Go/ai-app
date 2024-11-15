@@ -1,7 +1,11 @@
 "use client";
 import { getUserByID } from "@/lib/Request";
 import { useAppDispatch, useAppSelector } from "@/store/store";
-import { updatePlanName, updateUsername } from "@/store/userRedux";
+import {
+  updateEndDate,
+  updatePlanName,
+  updateUsername,
+} from "@/store/userRedux";
 
 import { useSession } from "next-auth/react";
 import { useEffect } from "react";
@@ -27,6 +31,8 @@ function GetInfoUser() {
     const result = await getUserByID({ userID });
     dispatch(updateUsername({ username: result.username }));
     dispatch(updatePlanName({ planName: result.planName }));
+
+    dispatch(updateEndDate({ endDate: result.endDate }));
 
     //UPDATE THE STATE
     //SET A GLOBAL LOADING STATE TO SHOW THE SKELETON

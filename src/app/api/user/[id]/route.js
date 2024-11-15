@@ -8,6 +8,7 @@ import {
   getSubscriptionsByIdUser,
   getUserByID,
   updateUsername,
+  updateUserSubcription,
 } from "@/lib/userRequest";
 import { NextResponse } from "next/server";
 
@@ -28,11 +29,38 @@ export const GET = async (req, { params }) => {
       _id: found._doc._id,
       email: found._doc.email,
     };
+    console.log({ subcriptionUser });
+    //check the fucking date you're saving!!!!
+    const currentDate = new Date().toISOString().split("T")[0];
+    const endDate = subcriptionUser.endDate;
+    if (!subcriptionUser.active && currentDate === endDate) {
+      console.log("FINISH DATE");
+      const updateSubscription = await updateUserSubcription({
+        userID: id,
+        planName: "Free",
+        stripe_plan_id: "free_plan_43522_22",
+
+        //  subID: session.subscription,
+      });
+      return NextResponse.json({
+        ...userFound,
+
+        planName: "Free",
+        stripe_plan_id: "free_plan_43522_22",
+        subID: "",
+        startDate: "never",
+        endDate: "never",
+      });
+    }
+    ///IF ACTIVE IS FALSE AND START AND END DATE COINCIDE UPDATE THE  DB
+    /// SEE WHAT DATA I'M SAVING
     return NextResponse.json({
       ...userFound,
 
       planName: subcriptionUser.planName,
       stripe_plan_id: subcriptionUser.stripe_plan_id,
+      subID: subcriptionUser.subID,
+      endDate: subcriptionUser.endDate,
     });
   } catch (error) {
     if (error instanceof ValidationError) {

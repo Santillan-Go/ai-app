@@ -57,5 +57,114 @@
         }
       ]
     }
-  ]
+  ],
+  "stripe": {
+    "id": "evt_1QIeOxE8aJqhsUs96lljeWNT",
+    "object": "event",
+    "api_version": "2024-06-20",
+    "created": 1731019327,
+    "data": {
+      "object": {
+        "id": "cs_test_a1cD4hwoDXbSUwOAzFYcMCm13qwTjTDbxJdyfPdtnhLISzCxIs5cn3K0F1",
+        "object": "checkout.session",
+        "adaptive_pricing": null,
+        "after_expiration": null,
+        "allow_promotion_codes": null,
+        "amount_subtotal": 12500,
+        "amount_total": 12500,
+        "automatic_tax": {
+          "enabled": false,
+          "liability": null,
+          "status": null
+        },
+        "billing_address_collection": null,
+        "cancel_url": "http://localhost:4000/plans",
+        "client_reference_id": null,
+        "client_secret": null,
+        "consent": null,
+        "consent_collection": null,
+        "created": 1731019274,
+        "currency": "mxn",
+        "currency_conversion": null,
+        "custom_fields": [],
+        "custom_text": {
+          "after_submit": null,
+          "shipping_address": null,
+          "submit": null,
+          "terms_of_service_acceptance": null
+        },
+        "customer": "cus_RB0PxUdspaXvtW",
+        "customer_creation": "always",
+        "customer_details": {
+          "address": {
+            "city": null,
+            "country": "MX",
+            "line1": null,
+            "line2": null,
+            "postal_code": null,
+            "state": null
+          },
+          "email": "santillango10405@gmail.com",
+          "name": "Carlos santillan",
+          "phone": null,
+          "tax_exempt": "none",
+          "tax_ids": []
+        },
+        "customer_email": null,
+        "expires_at": 1731105673,
+        "invoice": "in_1QIeOvE8aJqhsUs9QXL2tuIl",
+        "invoice_creation": null,
+        "livemode": false,
+        "locale": null,
+        "metadata": {
+          "userID": "106317081117956063134",
+          "name": "Premium-Plan"
+        },
+        "mode": "subscription",
+        "payment_intent": null,
+        "payment_link": null,
+        "payment_method_collection": "always",
+        "payment_method_configuration_details": null,
+        "payment_method_options": {
+          "card": {
+            "request_three_d_secure": "automatic"
+          }
+        },
+        "payment_method_types": ["card"],
+        "payment_status": "paid",
+        "phone_number_collection": {
+          "enabled": false
+        },
+        "recovered_from": null,
+        "saved_payment_method_options": {
+          "allow_redisplay_filters": ["always"],
+          "payment_method_remove": null,
+          "payment_method_save": null
+        },
+        "setup_intent": null,
+        "shipping_address_collection": null,
+        "shipping_cost": null,
+        "shipping_details": null,
+        "shipping_options": [],
+        "status": "complete",
+        "submit_type": null,
+        "subscription": "sub_1QIeOvE8aJqhsUs9gFA5pg73",
+        "success_url": "http://localhost:4000/success",
+        "total_details": {
+          "amount_discount": 0,
+          "amount_shipping": 0,
+          "amount_tax": 0
+        },
+        "ui_mode": "hosted",
+        "url": null
+      }
+    },
+    "livemode": false,
+    "pending_webhooks": 1,
+    "request": {
+      "id": null,
+      "idempotency_key": null
+    },
+    "type": "checkout.session.completed"
+  }
 }

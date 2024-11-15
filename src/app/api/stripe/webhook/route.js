@@ -21,14 +21,17 @@ export const POST = async (req) => {
     switch (event.type) {
       case "checkout.session.completed": {
         const session = event.data.object;
-        const { userID } = session.metadata;
+        const { userID, stripe_plan_id, name } = session.metadata;
 
         if (userID) {
           console.log({ userID });
+          console.log(session);
           const updateSubscription = await updateUserSubcription({
             userID,
-            planName: data.name,
-            stripe_plan_id: session.subscription_data.items[0].price.id,
+            planName: name,
+            stripe_plan_id,
+            subID: session.subscription,
+            active: true,
           });
           // Subscription.create({
           //   data: {
