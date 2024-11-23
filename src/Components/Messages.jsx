@@ -21,6 +21,8 @@ const Messages = React.memo(
     useEffect(() => {
       if (LastOneRef.current) {
         LastOneRef.current.scrollIntoView({ behavior: "smooth" });
+        // LastOneRef.current.style = "card-text";
+        //LastOneRef.current.classList.add("card-text"); // Add the class
       }
     }, [messages]);
 
@@ -50,6 +52,7 @@ const Messages = React.memo(
 
         <div ref={messagesEndRef}></div>
         {isLoading && <SqueletonMessage ref={Squeleton} />}
+
         {error && showError && (
           <MessageError callAgain={callAgain} lastMessageOne={lastMessageOne} />
         )}

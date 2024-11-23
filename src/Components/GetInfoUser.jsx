@@ -2,6 +2,7 @@
 import { getUserByID } from "@/lib/Request";
 import { useAppDispatch, useAppSelector } from "@/store/store";
 import {
+  updateActive,
   updateEndDate,
   updatePlanName,
   updateSubID,
@@ -35,6 +36,7 @@ function GetInfoUser() {
 
     dispatch(updateEndDate({ endDate: result.endDate }));
     dispatch(updateSubID({ subID: result.subID }));
+    dispatch(updateActive({ active: result.active }));
 
     //UPDATE THE STATE
     //SET A GLOBAL LOADING STATE TO SHOW THE SKELETON

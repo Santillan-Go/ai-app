@@ -4,7 +4,7 @@ import AddIcon from "@mui/icons-material/Add";
 import { usePathname } from "next/navigation";
 import ModalGetTokens from "./ModalGetTokens";
 import { useState } from "react";
-function TokensChat() {
+function TokensChat({ Tokens }) {
   const [isOpen, setIsOpen] = useState(false);
   const pathName = usePathname();
   const handleToggle = () => setIsOpen(!isOpen);
@@ -12,7 +12,7 @@ function TokensChat() {
   return (
     <section className="flex items-center gap-2 text-slate-300 ">
       {isOpen && <ModalGetTokens from={pathName} handleToggle={handleToggle} />}
-      <h3 className="text-xl font-semibold text-center ">{`Tokens: ${10}`}</h3>
+      <h3 className="text-xl font-semibold text-center ">{`Tokens: ${Tokens}`}</h3>
       <button
         onClick={handleToggle}
         className="group flex items-center gap-[2px]

@@ -1,9 +1,7 @@
 "use client";
 
-import useTheme from "@/HOOKS/useTheme";
 import { useAppDispatch, useAppSelector } from "@/store/store";
 import { setTheme } from "@/store/ThemeRedux";
-import React, { useEffect } from "react";
 
 function ThemeUser({ label, options, language }) {
   const dispatch = useAppDispatch();

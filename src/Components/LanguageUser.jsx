@@ -4,7 +4,7 @@ import { changeLanguage } from "@/store/ContentRedux";
 import { useAppDispatch, useAppSelector } from "@/store/store";
 import { useEffect } from "react";
 
-export default function LanguageUser({ label, options }) {
+export default function LanguageUser({ label, options, languageName }) {
   const language = useAppSelector((state) => state.ContentLanguage.language);
   const dispatch = useAppDispatch();
   const handleChange = (event) => {
@@ -35,7 +35,7 @@ export default function LanguageUser({ label, options }) {
         id="language"
         className="rounded-3xl p-1 text-black"
         onChange={handleChange}
-        value={language}
+        value={languageName}
       >
         {options.map((option) => (
           <option key={option} value={option.toLowerCase()}>

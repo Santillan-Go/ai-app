@@ -14,7 +14,7 @@ async function page() {
   return (
     <section className="h-screen w-full  items-center pt-2">
       <BackToCustom />
-      <article className="flex justify-center gap-4 ">
+      <article className="flex justify-center flex-wrap  gap-4 ">
         {plans
           .sort((a, b) => a.price - b.price)
 

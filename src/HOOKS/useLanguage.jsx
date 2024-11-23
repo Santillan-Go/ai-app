@@ -7,6 +7,7 @@ function useLanguage() {
   return {
     ...(language.language === "spanish" ? language.spanish : language.english),
     spanish: language.language === "spanish" ? true : false,
+    languageName: language.language,
   };
 }
 

@@ -14,7 +14,11 @@ function GreetingUser() {
     if (Theme.theme === "blue fade") return "blue-fade-bg";
     if (Theme.theme === "dark mode") return "bg-black";
   };
+  const nameSplit = (name) => {
+    const cut = name.split(" ");
 
+    return `${cut[0]}`;
+  };
   return (
     <article className="flex-1 flex  justify-center mt-1">
       <section className="wrapper  sm:w-4/5 w-[90%]">
@@ -24,8 +28,8 @@ function GreetingUser() {
             <div className="child-container flex flex-col justify-center items-center">
               <h1 className={"wave-text  text-xl sm:text-4xl"}>
                 {language.spanish
-                  ? ` HOLA, ${username.toLocaleUpperCase()}!`
-                  : ` HI, ${username.toLocaleUpperCase()}!`}
+                  ? ` HOLA, ${nameSplit(username).toLocaleUpperCase()}!`
+                  : ` HI, ${nameSplit(username).toLocaleUpperCase()}!`}
               </h1>
 
               <h1 className={"wave-text  text-xl sm:text-4xl"}>

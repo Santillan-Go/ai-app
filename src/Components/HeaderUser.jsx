@@ -37,7 +37,19 @@ function HeaderUser() {
   //     dispatch(updateUsername({ username: name }));
   //   }
   // }, [name]);
+  const nameSplit = (name) => {
+    const cut = name.split(" ");
 
+    return `${cut[0]} ${cut[1]}`;
+  };
+  /*
+ const name = (name) => {
+    const cut = name.split();
+
+    return `${cut[0]} ${cut[1]}`
+  };
+  console.log(name("Juan Carlos"))
+*/
   return (
     <section
       className={`
@@ -53,7 +65,7 @@ function HeaderUser() {
         <p className="apply-spin inline-block text-2xl">👋</p>
         <h1 className="font-bold sm:text-2xl  wave-text">
           {language.spanish ? "HOLA" : "HI"},{" "}
-          {username ? username.toLocaleUpperCase() : "Loading..."}!
+          {username ? nameSplit(username).toLocaleUpperCase() : "Loading..."}!
         </h1>
       </div>
 

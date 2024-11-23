@@ -15,7 +15,7 @@ function Config() {
   const username = useAppSelector((state) => state.userRedux.username);
   const Theme = useTheme();
   //${Theme.theme === "dark mode" ? `${Theme.children}` : "bg-main-white"}
-
+  console.log(language);
   //
   return (
     <article
@@ -38,6 +38,7 @@ function Config() {
         <LanguageUser
           label={language.language.label}
           options={language.language.options}
+          languageName={language.languageName}
         />
 
         <ThemeUser

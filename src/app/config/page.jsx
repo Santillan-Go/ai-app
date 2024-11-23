@@ -10,8 +10,8 @@ async function page() {
     redirect("/auth/signin");
   }
   return (
-    <section className="h-screen w-full flex p-2  ">
-      <BackTo LINK={"/"}></BackTo>
+    <section className="h-screen w-full flex p-2  flex-col sm:flex-row ">
+      <BackTo LINK={"/"} />
       <div className="flex justify-center w-full p-4">
         <Config />
       </div>

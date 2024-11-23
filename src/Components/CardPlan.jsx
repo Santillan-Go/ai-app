@@ -1,105 +1,24 @@
 "use client";
 
-import { useSession } from "next-auth/react";
 import React from "react";
-import { useRouter } from "next/navigation";
-import { useAppSelector } from "@/store/store";
+import useValidatePlanCard from "@/HOOKS/useValidatePlanCard";
+import useActionPlan from "@/HOOKS/useActionPlan";
 
 function CardPlan({ plan }) {
-  const { data: session, status } = useSession();
-  const router = useRouter();
-  //console.log({ planId: plan.stripe_plan_id, name: plan.name });
-  const userID = session?.user?.id || "";
-  const currentPlan = useAppSelector((state) => state.userRedux.planName);
+  const { endDate, money, subID, Text, isDisabled } = useValidatePlanCard({
+    name: plan.name,
+  });
+  const { handleCancel, handlePurchase } = useActionPlan({
+    name: plan.name,
+    planId: plan.stripe_plan_id,
+    subID,
+    endDate,
+  });
 
-  const endDate = useAppSelector((state) => state.userRedux.endDate);
-  const subID = useAppSelector((state) => state.userRedux.subID);
-
-  // const currentPlan = "Free";
-  const handlePurchase = async () => {
-    const res = await fetch(`/api/stripe/checkout`, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      // SEND EMAIL AND ID
-      body: JSON.stringify({
-        planId: plan.stripe_plan_id,
-        userID,
-        name: plan.name,
-      }),
-    });
-
-    if (!res.ok) {
-      console.log(res);
-    }
-
-    const json = await res.json();
-    router.push(json.url);
-  };
-
-  const handleCancel = async () => {
-    // alert("Canceling plan");
-    // cancel the subscription
-    // call to api
-    const response = await fetch(`/api/stripe/cancel`, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        subID,
-        userID,
-        endDate,
-      }),
-    });
-    if (!response.ok) return false;
-
-    const json = await response.json();
-    const { url } = json;
-    router.push(url);
-  };
-
-  const validatePlanPay = () => {
-    const moneyPlan = ["Pro", "Standard"];
-    return moneyPlan.includes(currentPlan);
-  };
-
-  const CheckCurrentPlan = () => {
-    if (validatePlanPay()) {
-      /*
-current:true
-disabled:true
-*/
-      return {
-        current: currentPlan.includes(plan.name),
-        disabled: true,
-        money: true,
-      };
-      //disabled other and add current
-      //IF IT IS PRO OR STANDARD I'M GOING TO CALL THE CURRENT "CANCEL", AND DISABLED THE OTHERS
-    } else {
-      //enable other
-      // THI IS FOR FREE PLAN, I'M GONNA ALLOW THE OTHER BUTTONS TO BE CLICK
-      return {
-        current: currentPlan.includes(plan.name),
-        disabled: false,
-        money: false,
-      };
-
-      /*
-    current:true
-    disabled:false
-    */
-    }
-  };
-  //plan.prices[0].id
-  const { current, disabled, money } = CheckCurrentPlan();
-  // console.log({ current, name: plan.name, money });
   return (
     <div
-      key={plan.id}
-      className="group hover:border-[0.5px] hover:border-slate-200 bg-gray-700 bg-opacity-25 rounded-3xl p-4 flex flex-col justify-between gap-4 text-slate-300 w-64 h-[500px] hover:bg-opacity-50 hover:shadow-xl hover:scale-105 transition-all duration-200 hover:cursor-pointer"
+      key={crypto.randomUUID()}
+      className="group hover:border-[0.5px] hover:border-slate-200 bg-gray-700 bg-opacity-25 rounded-3xl p-4 flex flex-col justify-between gap-4 text-slate-300 w-64 h-[500px] hover:bg-opacity-50 hover:shadow-xl hover:scale-105 transition-all duration-200 hover:cursor-pointer mt-1 mb-1 sm:mt-0 sm:mb-0 "
     >
       <div className="flex flex-col gap-1 basis-[35%] items-center">
         <h2 className="group-hover:text-shadow-lg text-center font-semibold text-2xl text-slate-100 transition-all duration-200 flex-1">
@@ -139,13 +58,13 @@ disabled:true
               </div>
             ))}
         </section>
-        {/* !current && !money */}
+
         <button
           onClick={money ? handleCancel : handlePurchase}
-          disabled={money ? (current ? false : true) : current ? true : false}
+          disabled={isDisabled}
           className="w-4/5 py-2 rounded-2xl border border-slate-300 hover:bg-opacity-70 hover:text-white hover:font-semibold hover:shadow-md transition-all duration-200 justify-items-end disabled:font-normal disabled:bg-opacity-100  disabled:text-gray-500  disabled:border-slate-500"
         >
-          {money ? (current ? "Cancel" : "Buy") : current ? "Current" : "Buy"}
+          {Text}
         </button>
       </div>
     </div>
@@ -154,11 +73,52 @@ disabled:true
 
 export default CardPlan;
 {
-  /* <button
+  /*
+  
+money
+            ? isCurrent
+              ? active
+                ? "Cancel"
+                : "Cancelado"
+              : "Buy"
+            : isCurrent
+            ? "Current"
+            : "Buy"
+
+   money
+              ? isCurrent
+                ? active
+                  ? false
+                  : true
+                : true
+              : isCurrent
+              ? true
+              : false
+   <button
           onClick={handlePurchase}
           disabled={currentPlan.includes(plan.name) ? true : false}
           className="w-4/5 py-2 rounded-2xl border border-slate-300 hover:bg-opacity-70 hover:text-white hover:font-semibold hover:shadow-md transition-all duration-200 justify-items-end disabled:font-normal disabled:bg-opacity-100  disabled:text-gray-500  disabled:border-slate-500"
         >
           {currentPlan.includes(plan.name) ? "Current" : "Buy"}
-        </button> */
+        </button> 
+        
+        // const CheckCurrentPlan = () => {
+  //   if (money) {
+  //     return {
+  //       current: currentPlan.includes(plan.name),
+  //     };
+  //     //disabled other and add current
+  //     //IF IT IS PRO OR STANDARD I'M GOING TO CALL THE CURRENT "CANCEL", AND DISABLED THE OTHERS
+  //   } else {
+  //     //enable other
+  //     // THI IS FOR FREE PLAN, I'M GONNA ALLOW THE OTHER BUTTONS TO BE CLICK
+  //     return {
+  //       current: currentPlan.includes(plan.name),
+  //     };
+  //   }
+  // };
+
+  // const { current } = CheckCurrentPlan();
+
+        */
 }

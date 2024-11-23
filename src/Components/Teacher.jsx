@@ -70,7 +70,7 @@ export default function Teacher({ id }) {
               </h1>
               <Link
                 href={`/chat/${id}`}
-                className={`${getColor()}  sm:p-2 rounded-2xl font-bold text-xl sm:text-2xl  text-center pl-1 pr-1 sm:pl-0 sm:pr-0`}
+                className={`${getColor()}  sm:p-2  rounded-2xl font-bold text-xl sm:text-2xl  text-center pl-1 pr-1 `}
               >
                 {language.teacher.link}
               </Link>

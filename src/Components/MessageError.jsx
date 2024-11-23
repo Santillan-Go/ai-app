@@ -3,7 +3,7 @@
 import ErrorIcon from "@mui/icons-material/Error";
 function MessageError({ callAgain, lastMessageOne }) {
   return (
-    <div className="text-center  bg-red-950 flex flex-col gap-4 p-3  w-80 h-60 rounded-3xl shadow-lg shadow-red-600 self-end items-center">
+    <div className="text-center  bg-red-950 flex flex-col gap-4 p-3  w-80 h-60 rounded-3xl shadow-lg shadow-red-600 self-end items-center mb-4">
       <div className="  text-2xl font-bold text-white ">
         <ErrorIcon className="text-white w-10 h-10  shadow-lg rounded-full shadow-red-600" />
         <p className="font-bold"> Error:</p>

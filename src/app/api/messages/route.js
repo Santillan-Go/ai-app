@@ -19,6 +19,7 @@ export const POST = async (req, { params }) => {
 
     return NextResponse.json(newMessageUser);
   } catch (error) {
+    console.error(error, "ERROR");
     if (error instanceof ValidationError) {
       return NextResponse.json({ message: error.message }, { status: 400 });
     }

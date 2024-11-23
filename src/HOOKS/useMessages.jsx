@@ -9,7 +9,9 @@ import { useSession } from "next-auth/react";
 import useVoiceToText from "./useVoiceToText";
 import useTextFromImage from "./useTextFromImage";
 import { autoResize } from "@/Components/FormMessage";
-
+import useValidatePlan from "./useValidatePlan";
+import { Bounce, toast } from "react-toastify";
+import useLanguage from "./useLanguage";
 function useMessages({ id, lastMessages }) {
   const { data: session, status } = useSession();
 
@@ -21,7 +23,10 @@ function useMessages({ id, lastMessages }) {
   const [showError, setShowError] = useState(false);
   const ref = useRef(null);
   const [cursor, setCursor] = useState(0);
-
+  const [Tokens, setTokens] = useState(2);
+  const { money } = useValidatePlan();
+  const { languageName } = useLanguage();
+  //console.log(all);
   const {
     toggleListening,
     transcript,
@@ -55,7 +60,12 @@ function useMessages({ id, lastMessages }) {
       setIsLoading(true);
       const res = await fetch("/api/chat", {
         method: "POST",
-        body: JSON.stringify({ content: message, lastMessages, username }),
+        body: JSON.stringify({
+          content: message,
+          lastMessages,
+          username,
+          language: languageName,
+        }),
       });
 
       if (!res.ok) {
@@ -79,11 +89,31 @@ function useMessages({ id, lastMessages }) {
     async (event) => {
       event.preventDefault();
       if (!input) return;
+      if (!money) {
+        if (Tokens < 1) {
+          toast.error(" You don't have enough tokens", {
+            position: "bottom-right",
+            autoClose: 5000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+            theme: "dark",
+            transition: Bounce,
+            bodyClassName: "bg-opacity-15",
+            // className:
+            //   "top-2 bottom-auto sm:bottom-7 sm:top-auto right-0 sm:right-2 p-0 w-full",
+          });
 
-      // if (IsListening) {
-      //   handleTyping();
+          // return <h2 className="right-2"></h2>;
 
-      // }
+          // toast("You do not have enough tokens");
+          // toast("There are not more tokens");
+          return;
+        }
+        setTokens(Tokens - 1);
+      }
       setInput("");
       await newmessages({
         dispatch,
@@ -99,6 +129,8 @@ function useMessages({ id, lastMessages }) {
     },
     [input, dispatch, id, userID, callAI]
   );
+
+  const restarTokens = () => setTokens(10);
 
   const Change = useCallback(
     (event) => {
@@ -168,6 +200,7 @@ function useMessages({ id, lastMessages }) {
     resetText,
     setImage,
     text,
+    Tokens,
   };
 }
 

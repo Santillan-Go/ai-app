@@ -61,6 +61,7 @@ export const GET = async (req, { params }) => {
       stripe_plan_id: subcriptionUser.stripe_plan_id,
       subID: subcriptionUser.subID,
       endDate: subcriptionUser.endDate,
+      active: subcriptionUser.active,
     });
   } catch (error) {
     if (error instanceof ValidationError) {
