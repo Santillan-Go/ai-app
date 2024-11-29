@@ -6,9 +6,30 @@ import { PlansSubscription } from "@/lib/Schema";
 
 // const stripe = new Stripe(process.env.STRIPE_SECRET_KEY);
 
-export const GET = async () => {
+export const GET = async (req) => {
   try {
+    const searchParams = req.nextUrl.searchParams;
+    const lang = searchParams.get("lang");
     const results = await PlansSubscription.find();
+
+    const plansLanguage = results.map((plan) => ({
+      id: plan.id,
+      name: plan.name,
+      img: plan.img,
+      description: plan.description.get(lang),
+      price: plan.price,
+      currency: plan.currency,
+      benefits: plan.benefits.map((b) => ({
+        description: b.description.get(lang),
+      })),
+      limitations: plan.limitations.map((l) => ({
+        description: l.description.get(lang),
+      })),
+      max_queries: plan.max_queries,
+      access_level: plan.access_level,
+      trial_period_days: plan.trial_period_days,
+      is_active: plan.is_active,
+    }));
     // const stripe = new Stripe(process.env.STRIPE_SECRET_KEY);
 
     // const prices = await stripe.prices.list();
@@ -33,7 +54,9 @@ export const GET = async () => {
     //   };
     // });
     // console.log(prices);
-    return NextResponse.json(results);
+    // return NextResponse.json({ lang });
+
+    return NextResponse.json(plansLanguage);
     // Fetch all products
 
     // // Fetch all prices (you can filter by product id if needed)
@@ -150,10 +173,11 @@ export async function GET() {
 export const DELETE = async (req) => {
   // DELETE FROM DB
   const data = await req.json();
-  const result = await PlansSubscription.deleteOne({
-    stripe_plan_id: data.stripe_plan_id,
-  });
+  const result = await PlansSubscription.deleteMany();
 
+  // const result = await PlansSubscription.deleteOne({
+  //   stripe_plan_id: data.stripe_plan_id,
+  // });
   try {
     return NextResponse.json({ message: "Plans deleted successfully!" });
   } catch (error) {

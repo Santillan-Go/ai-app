@@ -3,6 +3,7 @@ import ReactCrop from "react-image-crop";
 import Loader from "./Loader";
 import ButtonCancelText from "./ButtonCancelText";
 import BothButtonsScale from "./BothButtonsScale";
+import useLanguage from "@/HOOKS/useLanguage";
 
 const ModalmageText = forwardRef(function ModalmageText({
   imgSrc,
@@ -29,9 +30,7 @@ const ModalmageText = forwardRef(function ModalmageText({
   loadingText,
   setImage,
 }) {
-  useEffect(() => {
-    console.log({ isMouseDown, new: true });
-  }, [isMouseDown]);
+  const { spanish } = useLanguage();
   return (
     <>
       {imgSrc && (
@@ -109,7 +108,7 @@ const ModalmageText = forwardRef(function ModalmageText({
             )}
           </div>
           {/*CURRENT IMAGE EDITING*/}
-          <div className="Crop_Relative">
+          <div className="Crop_Relative p-4 gap-4  relative flex flex-col justify-center sm:flex-row  sm:justify-center sm:items-center ">
             {!!imgSrc && (
               <ReactCrop
                 crop={crop}
@@ -162,7 +161,13 @@ const ModalmageText = forwardRef(function ModalmageText({
                 }}
                 className="button_text"
               >
-                {!accept ? "Accept" : "Cancel"}
+                {!accept
+                  ? spanish
+                    ? "Aceptar"
+                    : "Accept"
+                  : spanish
+                  ? "Cancelar"
+                  : "Cancel"}
               </button>
             )}
 
@@ -176,7 +181,7 @@ const ModalmageText = forwardRef(function ModalmageText({
                 }}
                 className="button_text"
               >
-                Get text
+                {spanish ? "Extraer Texto" : "Get text"}
               </button>
             )}
           </section>

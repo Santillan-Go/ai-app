@@ -1085,3 +1085,23 @@ input[type="number"] {
     opacity: 1;
   }
 }
+.card_content a {
+  color: rgb(89, 89, 245);
+  border: 1px solid blue;
+  font-weight: bold;
+  width: 100%;
+  height: auto;
+  width: 100% !important;
+  max-width: 100%;
+  display: block;
+  align-self: stretch;
+  overflow-wrap: break-word;
+
+  overflow: hidden; /* Truncates overflowing text if necessary */
+  text-overflow: ellipsis; /* Adds "..." for overflowing text */
+  display: inline-block;
+}
+
+.father_card {
+  overflow-wrap: break-word;
+}

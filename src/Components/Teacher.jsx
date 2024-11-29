@@ -47,7 +47,7 @@ export default function Teacher({ id }) {
   return (
     <section className="text-main-white p-2">
       {loading ? (
-        <TutorSqueleton />
+        <TutorSqueleton BackTo={<BackTo LINK={"/"} />} />
       ) : (
         <>
           <div className="flex justify-between p-2">

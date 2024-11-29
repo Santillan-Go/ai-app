@@ -1,18 +1,17 @@
 "use client";
 
-import { useAppSelector } from "@/store/store";
 import BackTo from "./BackTo";
 import FormMessage from "./FormMessage";
 
 import Messages from "./Messages";
 import useMessages from "@/HOOKS/useMessages";
 import GreetingUser from "./GreetingUser";
-import { useCallback, useEffect, useMemo, useRef, useState } from "react";
+import { useCallback, useRef, useState } from "react";
 import useGetMessages from "@/HOOKS/useGetMessages";
 import SkeletonLoader from "./SkeletonLoader";
 import BtnRetry from "./BtnRetry";
 import BtnGoToBottom from "./BtnGoToBottom";
-import useTextFromImage from "@/HOOKS/useTextFromImage";
+
 import UseImageCrop from "@/HOOKS/useImageCrop";
 import ModalmageText from "./ModalmageTex";
 import TokensChat from "./TokensChat";
@@ -111,24 +110,15 @@ function UserMessage({ id }) {
     handleScale,
   } = UseImageCrop();
 
-  const contextClass = {
-    success: "bg-blue-600",
-    error: "bg-red-600",
-    info: "bg-gray-600",
-    warning: "bg-orange-400",
-    default: "bg-indigo-600",
-    dark: "bg-gray-light bg-opacity-15 backdrop-blur-md border border-white-10 font-gray-300",
-  };
-
   return (
     <section className="h-screen p-2 flex flex-col ">
       <ToastContainer
         // THIS IS FIXED, SO THERE IS NOT PROBLEM WITH THIS COMPONENT
         className={
-          "w-[90%] ml-auto mr-auto  sm:w-[320px] bottom-auto  sm:bottom-12 left-1/2 translate-x-[-50%]  sm:left-auto sm:top-auto sm:right-2 top-2    sm:p-4 p-2 gap-2 absolute  flex flex-col h-4/5 items-center sm:flex-col-reverse"
+          "w-[90%] ml-auto mr-auto   sm:w-[320px] bottom-auto  sm:bottom-12 left-1/2 translate-x-[-50%]  sm:left-auto sm:top-auto sm:right-2 top-2    sm:p-4 p-2 gap-2 absolute  flex flex-col h-4/5 items-center sm:flex-col-reverse"
         }
       />
-      <div className="flex justify-between ">
+      <div className="flex justify-between basis-[5%] sm:basis-auto">
         <BackTo LINK={`/teacher/${id}`} />
         {money ? <div></div> : <TokensChat Tokens={Tokens} />}
       </div>
@@ -146,7 +136,7 @@ function UserMessage({ id }) {
           messagesEndRef={messagesEndRef}
         />
       ) : errorLoad ? (
-        <div className=" basis-[90%] flex justify-center items-center">
+        <div className="  basis-[85%] sm:basis-[90%] flex justify-center items-center">
           <BtnRetry retryFetch={retryFetch} />
         </div>
       ) : (

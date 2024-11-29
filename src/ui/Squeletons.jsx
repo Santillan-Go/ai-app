@@ -86,11 +86,11 @@ export const TutorsSqueleton = ({ fadeOut }) => {
   );
 };
 
-export const TutorSqueleton = () => {
+export const TutorSqueleton = ({ BackTo }) => {
   return (
     <article className="animate-pulse w-full h-screen">
       <div className="flex justify-between p-2">
-        <div className="bg-slate-400 rounded-full h-10 w-10 skeleton "></div>
+        {BackTo}
         <div className="bg-slate-400 rounded-full h-10 w-10 skeleton "></div>
       </div>
 

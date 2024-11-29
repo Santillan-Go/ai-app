@@ -42,7 +42,6 @@ const UserSchema = new Schema({
 const SubscriptionSchema = new Schema({
   userID: { type: String, required: true, ref: "User" },
   planName: { type: String, required: true },
-
   startDate: { type: String, required: true },
   endDate: { type: String, required: true },
   stripe_plan_id: { type: String, required: true },
@@ -50,17 +49,31 @@ const SubscriptionSchema = new Schema({
   active: { type: Boolean, required: false },
 });
 
+// const ItemArray = new Schema({
+//   description: { type: String, requiered: true },
+// });
+
+const BenefitSchema = new Schema({
+  description: {
+    type: Map, // Stores key-value pairs for translations
+    of: String, // The value is a string for each language
+  },
+});
+
 const PlansSubscriptionSchema = new Schema(
   {
     id: { type: String, required: true },
     stripe_plan_id: { type: String, required: true },
     name: { type: String, required: true },
-    description: { type: String, required: true },
+    description: {
+      type: Map,
+      of: String, // Translations for description
+    },
     price: { type: Number, required: true },
     currency: { type: String, required: true },
     img: { type: String, required: true },
-    benefits: [{ type: String, required: true }],
-    limitations: [{ type: String, required: true }],
+    benefits: [BenefitSchema],
+    limitations: [BenefitSchema],
     max_queries: { type: String, required: true },
     access_level: {
       type: String,

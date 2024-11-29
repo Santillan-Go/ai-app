@@ -16,16 +16,18 @@ function useMessages({ id, lastMessages }) {
   const { data: session, status } = useSession();
 
   const userID = session?.user?.id || "";
-  const username = useAppSelector((state) => state.userRedux.username);
+  const username = useAppSelector((state) => state.userRedux.username).split(
+    " "
+  )[0];
   const [isLoading, setIsLoading] = useState(false);
   const [input, setInput] = useState("");
   const [error, setError] = useState(false);
   const [showError, setShowError] = useState(false);
   const ref = useRef(null);
   const [cursor, setCursor] = useState(0);
-  const [Tokens, setTokens] = useState(2);
+  const [Tokens, setTokens] = useState(10);
   const { money } = useValidatePlan();
-  const { languageName } = useLanguage();
+  const { languageName, spanish } = useLanguage();
   //console.log(all);
   const {
     toggleListening,
@@ -35,7 +37,7 @@ function useMessages({ id, lastMessages }) {
     IsListening,
     handleTyping,
   } = useVoiceToText({
-    lang: "es-ES",
+    lang: spanish ? "es-ES" : "en-EN",
   });
 
   const { loadingText, resetText, setImage, text } = useTextFromImage();

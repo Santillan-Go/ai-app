@@ -4,7 +4,7 @@ import React from "react";
 import useValidatePlanCard from "@/HOOKS/useValidatePlanCard";
 import useActionPlan from "@/HOOKS/useActionPlan";
 
-function CardPlan({ plan }) {
+function CardPlan({ plan, spanish }) {
   const { endDate, money, subID, Text, isDisabled } = useValidatePlanCard({
     name: plan.name,
   });
@@ -41,20 +41,20 @@ function CardPlan({ plan }) {
 
       <div className="flex flex-col items-center basis-[50%] justify-between">
         <p className="font-semibold text-lg text-slate-200 mb-2 gap-2">
-          Price: ${plan.price}
+          {spanish ? "Precio" : "Price"}: ${plan.price}
         </p>
 
         <section className="flex flex-col items-center gap-1 mb-2 mt-1 w-full ">
           {plan.benefits.length > 0 &&
             plan.benefits.map((b) => (
               <div key={b} className="text-sm text-slate-400 text-left w-full">
-                <b className="text-green-600 text-xl">✓</b> {b}
+                <b className="text-green-600 text-xl">✓</b> {b.description}
               </div>
             ))}
           {plan.limitations.length > 0 &&
             plan.limitations.map((b) => (
               <div key={b} className="text-sm text-slate-400 text-left w-full">
-                <b className="text-red-600 text-xl">X</b> {b}
+                <b className="text-red-600 text-xl">X</b> {b.description}
               </div>
             ))}
         </section>
