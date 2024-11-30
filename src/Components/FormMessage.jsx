@@ -40,7 +40,7 @@ const FormMessage = forwardRef(function FormMessage(
   return (
     <form
       onSubmit={(event) => Submit(event)}
-      className="flex-none h-[10%] w-full flex sm:justify-center gap-2px items-center sm:gap-8 sm:pl-4 sm:pr-4 "
+      className="basis-[10%]  w-full flex sm:justify-center gap-2px items-center sm:gap-8 sm:pl-4 sm:pr-4 "
     >
       <div
         className={` bg-gray-medium  rounded-3xl self-end sm:self-auto basis-[80%] sm:basis-[60%] relative p-1 textarea-container

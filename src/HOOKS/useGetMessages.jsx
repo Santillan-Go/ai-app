@@ -34,6 +34,15 @@ function useGetMessages({ chatID }) {
   };
 
   useEffect(() => {
+    // setMessagesFound({
+    //   messageAll: Array(100).fill({
+    //     content:
+    //       "HI, aaaa aaaaas sssss ssss sss aaa aaaaaa aaaaaaa aaaaa aaaaa aaaaaa aaaaaaa aaaa aaaaa aaaaaaa",
+    //     role: Math.round(Math.random()) == 0 ? "you" : "AI",
+    //   }),
+    // });
+
+    // setLoading(false);
     if (!messages) {
       fetchMessages(); // Fetch if no messages found
     } else {

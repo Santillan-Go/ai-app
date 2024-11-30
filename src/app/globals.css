@@ -823,11 +823,12 @@ html {
 
 .ReactCrop {
   background-color: rgba(0, 0, 0, 0.4);
-  max-width: 520px;
+  max-width: 500px;
   max-height: 85vh;
+  max-height: 70vh;
 }
 .ReactCrop img {
-  width: 520px;
+  width: 500px;
   border-radius: 1rem;
 }
 

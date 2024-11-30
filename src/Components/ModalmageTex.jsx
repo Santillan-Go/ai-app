@@ -107,6 +107,40 @@ const ModalmageText = forwardRef(function ModalmageText({
               </div>
             )}
           </div>
+
+          <section className="flex justify-center gap-2 items-center">
+            {imgSrc && (
+              <button
+                onClick={() => {
+                  handleAccept();
+                  resetText();
+                }}
+                className="button_text"
+              >
+                {!accept
+                  ? spanish
+                    ? "Aceptar"
+                    : "Accept"
+                  : spanish
+                  ? "Cancelar"
+                  : "Cancel"}
+              </button>
+            )}
+
+            {imgRef.current && accept && (
+              <button
+                onClick={async () => {
+                  const img = await onDownloadCropClick();
+                  await setImage({ img });
+                  hadleResetImg();
+                  imgRef.current = null;
+                }}
+                className="button_text"
+              >
+                {spanish ? "Extraer Texto" : "Get text"}
+              </button>
+            )}
+          </section>
           {/*CURRENT IMAGE EDITING*/}
           <div className="Crop_Relative p-4 gap-4  relative flex flex-col justify-center sm:flex-row  sm:justify-center sm:items-center ">
             {!!imgSrc && (
@@ -151,40 +185,6 @@ const ModalmageText = forwardRef(function ModalmageText({
               </>
             )}
           </div>
-
-          <section className="flex justify-center gap-2 items-center">
-            {imgSrc && (
-              <button
-                onClick={() => {
-                  handleAccept();
-                  resetText();
-                }}
-                className="button_text"
-              >
-                {!accept
-                  ? spanish
-                    ? "Aceptar"
-                    : "Accept"
-                  : spanish
-                  ? "Cancelar"
-                  : "Cancel"}
-              </button>
-            )}
-
-            {imgRef.current && accept && (
-              <button
-                onClick={async () => {
-                  const img = await onDownloadCropClick();
-                  await setImage({ img });
-                  hadleResetImg();
-                  imgRef.current = null;
-                }}
-                className="button_text"
-              >
-                {spanish ? "Extraer Texto" : "Get text"}
-              </button>
-            )}
-          </section>
         </section>
       )}
     </>
