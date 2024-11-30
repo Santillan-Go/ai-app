@@ -109,7 +109,7 @@ function UserMessage({ id }) {
 
   */
   return (
-    <section className="h-screen p-2 pt-0 sm:pt-2 flex flex-col ">
+    <section className="h-[90vh] sm:h-screen p-2 pt-0 sm:pt-2 flex flex-col ">
       <ToastContainer
         // THIS IS FIXED, SO THERE IS NOT PROBLEM WITH THIS COMPONENT
         className={
