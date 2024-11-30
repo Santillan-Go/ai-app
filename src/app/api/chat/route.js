@@ -9,7 +9,7 @@ export async function POST(req) {
     const { content, lastMessages, username, language } = await req.json();
     console.log({ username });
     // console.log(lastMessages, "lastmessages");
-    // console.log(content, "content");
+    console.log(content, "content");
 
     //CREATE SUMMARIZE
     // let summary;
@@ -32,9 +32,9 @@ export async function POST(req) {
     if (lastMessages.length !== 0 && username) {
       const model = genAI.getGenerativeModel({ model: "gemini-1.5-pro" });
 
-      const prompt = ` si necesitas contexto para responder preguntas aquí está:${JSON.stringify(
+      const prompt = `si necesitas contexto para responder preguntas aquí está:${JSON.stringify(
         lastMessages
-      )}} tú eres la AI(role), enfocate en responder esto:${content},remember the user's name is ${username}. Por favor responde todo en ${language} `;
+      )}, tú eres la AI(role), enfocate en responder esto:${content},remember the user's name is ${username}. Por favor responde todo en ${language} `;
 
       const result = await model.generateContent(prompt);
       // console.log(result.response.text());
@@ -69,7 +69,7 @@ export async function POST(req) {
     } else if (lastMessages.length === 0 && username) {
       const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash" });
 
-      const prompt = `${content}, remember name of the user is ${username}.  Por favor responde todo en ${language}`;
+      const prompt = `tú eres la AI(role), enfocate en responder esto:${content}, remember name of the user is ${username}.  Por favor responde todo en ${language}`;
 
       const result = await model.generateContent(prompt);
       console.log(result.response.text());
@@ -84,7 +84,7 @@ export async function POST(req) {
     } else if (lastMessages.length === 0 || !username) {
       const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash" });
 
-      const prompt = `${content}`;
+      const prompt = `enfocate en responder esto: ${content}`;
 
       const result = await model.generateContent(prompt);
       // console.log(result.response.text());

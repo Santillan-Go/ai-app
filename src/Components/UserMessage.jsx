@@ -2,7 +2,6 @@
 
 import BackTo from "./BackTo";
 import FormMessage from "./FormMessage";
-
 import Messages from "./Messages";
 import useMessages from "@/HOOKS/useMessages";
 import GreetingUser from "./GreetingUser";
@@ -11,7 +10,6 @@ import useGetMessages from "@/HOOKS/useGetMessages";
 import SkeletonLoader from "./SkeletonLoader";
 import BtnRetry from "./BtnRetry";
 import BtnGoToBottom from "./BtnGoToBottom";
-
 import UseImageCrop from "@/HOOKS/useImageCrop";
 import ModalmageText from "./ModalmageTex";
 import TokensChat from "./TokensChat";
@@ -110,15 +108,19 @@ function UserMessage({ id }) {
     handleScale,
   } = UseImageCrop();
 
+  /*
+  "flex justify-between basis-[5%] sm:basis-auto bg-red-500
+
+  */
   return (
-    <section className="h-screen p-2 flex flex-col ">
+    <section className="h-screen p-2 pt-0 sm:pt-2 flex flex-col bg-pink-500">
       <ToastContainer
         // THIS IS FIXED, SO THERE IS NOT PROBLEM WITH THIS COMPONENT
         className={
           "w-[90%] ml-auto mr-auto   sm:w-[320px] bottom-auto  sm:bottom-12 left-1/2 translate-x-[-50%]  sm:left-auto sm:top-auto sm:right-2 top-2    sm:p-4 p-2 gap-2 absolute  flex flex-col h-4/5 items-center sm:flex-col-reverse"
         }
       />
-      <div className="flex justify-between basis-[5%] sm:basis-auto">
+      <div className="flex-none h-[5%] flex justify-between sm:basis-auto bg-red-500">
         <BackTo LINK={`/teacher/${id}`} />
         {money ? <div></div> : <TokensChat Tokens={Tokens} />}
       </div>

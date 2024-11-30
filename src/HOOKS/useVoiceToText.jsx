@@ -9,6 +9,15 @@ function useVoiceToText({ lang = "es-ES" }) {
     setIsListening((prevState) => !prevState);
   };
 
+  // VALIDATE IF THE USER IS USING A PHONE OR DESKTOP
+
+  function isMobileDevice() {
+    const userAgent = navigator.userAgent || navigator.vendor || window.opera;
+
+    // Check for mobile keywords
+    return /android|iphone|ipad|ipod|windows phone|mobile/i.test(userAgent);
+  }
+
   // // Check if the browser supports the SpeechRecognition API
   const SpeechRecognition =
     window.SpeechRecognition || window.webkitSpeechRecognition;
@@ -39,7 +48,24 @@ function useVoiceToText({ lang = "es-ES" }) {
 
         // Only append the final transcript to the full transcript
         if (finalTranscriptChunk) {
-          setTranscript((prev) => prev + " " + finalTranscriptChunk);
+          setTranscript((prev) => {
+            if (!isMobileDevice()) {
+              return prev + " " + finalTranscriptChunk;
+            }
+
+            const newTranscript = `${prev} ${finalTranscriptChunk}`.trim();
+
+            // Ensure no repeating words
+            const deduplicatedTranscript = newTranscript
+              .split(" ")
+              .reduce((acc, word) => {
+                if (acc[acc.length - 1] !== word) acc.push(word);
+                return acc;
+              }, [])
+              .join(" ");
+
+            return deduplicatedTranscript;
+          });
         }
 
         // Update the interim transcript (to show real-time results but not save them permanently)
@@ -63,64 +89,13 @@ function useVoiceToText({ lang = "es-ES" }) {
     };
   }, [IsListening]);
 
-  // useEffect(() => {
-  //   const SpeechRecognition =
-  //     window.SpeechRecognition || window.webkitSpeechRecognition;
-  //   const recognition = new SpeechRecognition();
-
-  //   recognition.lang = lang;
-  //   recognition.continuous = true;
-  //   recognition.interimResults = true;
-
-  //   recognition.onresult = (event) => {
-  //     let finalTranscriptChunk = "";
-
-  //     // Loop through results and separate final and interim transcripts
-  //     for (let i = event.resultIndex; i < event.results.length; i++) {
-  //       const transcriptChunk = event.results[i][0].transcript;
-  //       if (event.results[i].isFinal) {
-  //         finalTranscriptChunk += transcriptChunk;
-  //       }
-  //     }
-
-  //     // Append only new final results to the main transcript
-  //     if (finalTranscriptChunk) {
-  //       setTranscript((prev) => prev + " " + finalTranscriptChunk.trim());
-  //     }
-
-  //     // Set interim transcript to show live results, and reset after final result
-
-  //   };
-
-  //   recognition.onerror = (event) => {
-  //     setError("Error occurred in recognition: " + event.error);
-  //   };
-
-  //   if (IsListening) {
-  //     recognition.start();
-  //   } else {
-  //     recognition.stop();
-  //   }
-
-  //   return () => {
-  //     recognition.abort(); // Cleanup on unmount or stop listening
-  //   };
-  // }, [IsListening, lang]);
-  // return <button>🎙️</button>;{
-
   const handleTyping = () => {
     if (IsListening) {
       recognition.stop();
       setIsListening(false);
     }
   };
-  // const handleTyping = () => {
-  //   if (IsListening) {
-  //     recognition.stop();
-  //     setIsListening(false);
-  //     setTranscript("");
-  //   }
-  // };
+
   return {
     transcript,
     toggleListening,
@@ -133,3 +108,56 @@ function useVoiceToText({ lang = "es-ES" }) {
 }
 
 export default useVoiceToText;
+
+// useEffect(() => {
+//   const SpeechRecognition =
+//     window.SpeechRecognition || window.webkitSpeechRecognition;
+//   const recognition = new SpeechRecognition();
+
+//   recognition.lang = lang;
+//   recognition.continuous = true;
+//   recognition.interimResults = true;
+
+//   recognition.onresult = (event) => {
+//     let finalTranscriptChunk = "";
+
+//     // Loop through results and separate final and interim transcripts
+//     for (let i = event.resultIndex; i < event.results.length; i++) {
+//       const transcriptChunk = event.results[i][0].transcript;
+//       if (event.results[i].isFinal) {
+//         finalTranscriptChunk += transcriptChunk;
+//       }
+//     }
+
+//     // Append only new final results to the main transcript
+//     if (finalTranscriptChunk) {
+//       setTranscript((prev) => prev + " " + finalTranscriptChunk.trim());
+//     }
+
+//     // Set interim transcript to show live results, and reset after final result
+
+//   };
+
+//   recognition.onerror = (event) => {
+//     setError("Error occurred in recognition: " + event.error);
+//   };
+
+//   if (IsListening) {
+//     recognition.start();
+//   } else {
+//     recognition.stop();
+//   }
+
+//   return () => {
+//     recognition.abort(); // Cleanup on unmount or stop listening
+//   };
+// }, [IsListening, lang]);
+// return <button>🎙️</button>;{
+
+// const handleTyping = () => {
+//   if (IsListening) {
+//     recognition.stop();
+//     setIsListening(false);
+//     setTranscript("");
+//   }
+// };

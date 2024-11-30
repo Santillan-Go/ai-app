@@ -117,6 +117,10 @@ function useMessages({ id, lastMessages }) {
         setTokens(Tokens - 1);
       }
       setInput("");
+      if (ref.current) {
+        ref.current.value = "";
+        autoResize({ target: ref.current });
+      }
       await newmessages({
         dispatch,
         id,
@@ -148,6 +152,13 @@ function useMessages({ id, lastMessages }) {
     },
     [IsListening, handleTyping]
   );
+  useEffect(() => {
+    console.log({ input });
+  }, [input]);
+  useEffect(() => {
+    console.log({ transcript });
+  }, [transcript]);
+
   useEffect(() => {
     // console.log(ref);
     ref.current?.setSelectionRange(cursor, cursor);
