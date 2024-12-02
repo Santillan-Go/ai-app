@@ -34,7 +34,7 @@ export async function POST(req) {
 
       const prompt = `si necesitas contexto para responder preguntas aquí está:${JSON.stringify(
         lastMessages
-      )}, tú eres la AI(role), enfocate en responder esto:${content},remember the user's name is ${username}. Por favor responde todo en ${language} `;
+      )} todo ese array es la conversación entre tú(role:AI) y user${username}, tú eres la AI(role), enfocate en responder esto:${content},remember the user's name is ${username}. Por favor responde todo en ${language} `;
 
       const result = await model.generateContent(prompt);
       // console.log(result.response.text());
@@ -52,7 +52,7 @@ export async function POST(req) {
 
       const prompt = ` si necesitas contexto para responder preguntas aquí está:${JSON.stringify(
         lastMessages
-      )}} tú eres la AI(role), enfocate en responder esto:${content}. Por favor responde todo en ${language}`;
+      )}} todo ese array es la conversación entre tú(role:AI) y user${username},tú eres la AI(role), enfocate en responder esto:${content}. Por favor responde todo en ${language}`;
 
       const result = await model.generateContent(prompt);
       // console.log(result.response.text());
