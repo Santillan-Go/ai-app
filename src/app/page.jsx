@@ -15,9 +15,9 @@ async function page() {
   console.log(session, "LAYOUT");
   //sm:before:p-4
   return (
-    <section className="min-h-screen">
+    <section>
       {session?.user?.name ? (
-        <section className="p-2 ">
+        <section className="p-2 min-h-screen ">
           <div className="flex justify-between pt-4 pl-4 pr-4">
             <Suspense fallback={<HeaderSqueleton />}>
               <HeaderBack />

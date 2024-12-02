@@ -10,7 +10,7 @@ import useTheme from "@/HOOKS/useTheme";
 function Register() {
   const Theme = useTheme();
   return (
-    <article className="h-screen w-full p-3  overflow-y-auto">
+    <article className="min-h-screen w-full p-3  ">
       <BackTo LINK={"/"} />
 
       <h2 class="text-3xl font-bold text-center mb-1  text-white">
@@ -21,7 +21,7 @@ function Register() {
           Theme.theme === "default" || Theme.theme === "blue fade"
             ? "shadow-slate-950 bg-gray-light bg-opacity-15 backdrop-blur-md border border-white-10"
             : "shadow-slate-700"
-        } gap-6`}
+        } gap-6 overflow-y-auto`}
       >
         <FormRegister />
         <ButtonGoogle action={"Register with Google"} />

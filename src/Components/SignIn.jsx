@@ -9,7 +9,7 @@ import useTheme from "@/HOOKS/useTheme";
 function SignIn() {
   const Theme = useTheme();
   return (
-    <article className="h-screen w-full p-3 overflow-y-auto ">
+    <article className="min-h-screen w-full p-3  ">
       <BackTo LINK={"/"} />
       <h1 class="text-white text-3xl font-bold text-center mb-1">
         Welcome Back! Sign In to Your Account
@@ -18,7 +18,7 @@ function SignIn() {
         className={`flex flex-col  w-full sm:w-35% items-center mr-auto ml-auto mt-16 rounded-3xl gap-6  shadow-2xl p-3 ${
           Theme.theme === "default" || Theme.theme === "blue fade"
             ? "shadow-slate-950 bg-gray-light bg-opacity-15 backdrop-blur-md border border-white-10"
-            : "shadow-slate-700"
+            : "shadow-slate-700 overflow-y-auto"
         }`}
       >
         <FormLogin />

@@ -32,7 +32,7 @@ function UserNotLogIn() {
   }, []);
   return (
     <section
-      className="h-screen w-full flex flex-col justify-between p-2"
+      className="min-h-screen w-full flex flex-col justify-between p-2"
       style={{ height: "calc(var(--vh))" }}
     >
       <ToastContainer
