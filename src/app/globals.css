@@ -65,7 +65,7 @@ body {
   background: linear-gradient(45deg, #1a011a, #1a011a, #380438, #380438);
   background-size: cover;
   color: #8a0788;
-  min-height: 100vh;
+  /* min-height: 100vh; */
 }
 
 .elements {

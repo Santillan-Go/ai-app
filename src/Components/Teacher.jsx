@@ -45,7 +45,7 @@ export default function Teacher({ id }) {
   // };
 
   return (
-    <section className="text-main-white p-2">
+    <section className="text-main-white p-2 min-h-screen">
       {loading ? (
         <TutorSqueleton BackTo={<BackTo LINK={"/"} />} />
       ) : (
