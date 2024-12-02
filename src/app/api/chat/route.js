@@ -32,9 +32,10 @@ export async function POST(req) {
     if (lastMessages.length !== 0 && username) {
       const model = genAI.getGenerativeModel({ model: "gemini-1.5-pro" });
 
-      const prompt = `si necesitas contexto para responder preguntas aquí está:${JSON.stringify(
+      const prompt = `todo ese array es la conversación entre tú(role:AI) y user(${username})
+      ${JSON.stringify(
         lastMessages
-      )} todo ese array es la conversación entre tú(role:AI) y user${username}, tú eres la AI(role), enfocate en responder esto:${content},remember the user's name is ${username}. Por favor responde todo en ${language} `;
+      )}, si necesitas contexto para responder preguntas tiene el array del chat , tú eres la AI(role), enfocate en responder esto:${content},remember the user's name is ${username}. Por favor responde todo en ${language} `;
 
       const result = await model.generateContent(prompt);
       // console.log(result.response.text());
@@ -50,9 +51,11 @@ export async function POST(req) {
     } else if (lastMessages.length !== 0 && !username) {
       const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash" });
 
-      const prompt = ` si necesitas contexto para responder preguntas aquí está:${JSON.stringify(
+      const prompt = ` 
+      todo ese array es la conversación entre tú(role:AI) y user:${username}
+      ${JSON.stringify(
         lastMessages
-      )}} todo ese array es la conversación entre tú(role:AI) y user${username},tú eres la AI(role), enfocate en responder esto:${content}. Por favor responde todo en ${language}`;
+      )},si necesitas contexto para responder preguntas tiene el array del chat ,tú eres la AI(role), enfocate en responder esto:${content}. Por favor responde todo en ${language}`;
 
       const result = await model.generateContent(prompt);
       // console.log(result.response.text());

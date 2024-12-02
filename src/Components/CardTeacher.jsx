@@ -19,7 +19,7 @@ function CardTeacher({ id, name, image }) {
   return (
     <Link
       href={`/teacher/${id}`}
-      className={` ${getTextColor()} flex flex-col items-center gap-2  sm:w-250px sm:h-275px w-130px  hover:cursor-pointer container-image text-slate-300`}
+      className={` ${getTextColor()} flex flex-col items-center gap-2  sm:w-250px sm:h-275px w-130px  sm:hover:cursor-pointer container-image text-slate-300`}
     >
       <div
         className={`${
@@ -29,7 +29,7 @@ function CardTeacher({ id, name, image }) {
         } w-full h-full p-1 sm:p-4 rounded-lg shadow-md overflow-hidden`}
       >
         <img
-          className="object-cover w-full h-32 rounded-t-lg rounded-b-lg image-zoom "
+          className="object-cover w-full h-32 rounded-t-lg rounded-b-lg sm:image-zoom "
           src={image}
           alt=""
         />

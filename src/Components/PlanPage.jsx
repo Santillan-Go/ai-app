@@ -19,9 +19,9 @@ function PlanPage() {
   }, []);
 
   return (
-    <section className="max-h-screen w-full  items-center pt-2">
+    <section className="h-screen sm:h-screen w-full  items-center pt-2">
       <BackToCustom />
-      <article className="flex justify-center flex-wrap  gap-4 overflow-y-auto">
+      <article className="flex justify-center items-center flex-wrap  gap-4 overflow-y-auto scrollbar-thin w-full h-full mt-2 mb-2">
         {plans
           .sort((a, b) => a.price - b.price)
 

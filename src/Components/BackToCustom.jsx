@@ -18,7 +18,11 @@ function BackToCustom() {
       return "/";
     }
   };
-  return <BackTo LINK={handleGoBack()}></BackTo>;
+  return (
+    <div className="fixed top-2 left-2 w-auto h-auto">
+      <BackTo LINK={handleGoBack()}></BackTo>
+    </div>
+  );
 }
 
 export default BackToCustom;

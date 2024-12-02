@@ -17,7 +17,10 @@ async function page() {
   return (
     <section className="h-auto w-auto">
       {session?.user?.name ? (
-        <section className="p-2 max-h-screen ">
+        <section
+          className="p-2 max-h-screen "
+          style={{ height: "calc(var(--vh))" }}
+        >
           <div className="flex justify-between pt-4 pl-4 pr-4">
             <Suspense fallback={<HeaderSqueleton />}>
               <HeaderBack />

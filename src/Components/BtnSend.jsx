@@ -4,7 +4,7 @@ function BtnSend({ input }) {
   return (
     <button
       type="submit"
-      className="rounded-full text-28px bg-gray-medium  self-end text-black w-11 h-11 absolute bottom-1 right-1 "
+      className="rounded-full text-28px bg-transparent self-end text-black w-11 h-11 absolute bottom-1 right-1 "
       disabled={!input}
     >
       <SendRoundedIcon

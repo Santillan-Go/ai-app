@@ -18,7 +18,7 @@ function CardPlan({ plan, spanish }) {
   return (
     <div
       key={crypto.randomUUID()}
-      className="group hover:border-[0.5px] hover:border-slate-200 bg-gray-700 bg-opacity-25 rounded-3xl p-4 flex flex-col justify-between gap-4 text-slate-300 w-64 h-[500px] hover:bg-opacity-50 hover:shadow-xl hover:scale-105 transition-all duration-200 hover:cursor-pointer mt-1 mb-1 sm:mt-0 sm:mb-0 "
+      className="sm:group sm:hover:border-[0.5px] hover:border-slate-200 bg-gray-700 bg-opacity-25 rounded-3xl p-4 flex flex-col justify-between gap-4 text-slate-300 w-64 h-[500px] hover:bg-opacity-50 hover:shadow-xl sm:hover:scale-105 transition-all duration-200 hover:cursor-pointer mt-1 mb-1 sm:mt-0 sm:mb-0 "
     >
       <div className="flex flex-col gap-1 basis-[35%] items-center">
         <h2 className="group-hover:text-shadow-lg text-center font-semibold text-2xl text-slate-100 transition-all duration-200 flex-1">

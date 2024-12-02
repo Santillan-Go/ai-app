@@ -10,7 +10,10 @@ async function page() {
     redirect("/auth/signin");
   }
   return (
-    <section className="max-h-screen w-full flex p-2  flex-col sm:flex-row ">
+    <section
+      className="h-screen w-full flex p-2  flex-col sm:flex-row "
+      style={{ height: "calc(var(--vh))" }}
+    >
       <BackTo LINK={"/"} />
       <div className="flex justify-center w-full p-4">
         <Config />
