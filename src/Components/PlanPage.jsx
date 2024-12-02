@@ -19,7 +19,7 @@ function PlanPage() {
   }, []);
 
   return (
-    <section className="min-h-screen w-full  items-center pt-2">
+    <section className="max-h-screen w-full  items-center pt-2">
       <BackToCustom />
       <article className="flex justify-center flex-wrap  gap-4 overflow-y-auto">
         {plans

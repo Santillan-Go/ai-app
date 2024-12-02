@@ -1,7 +1,6 @@
 "use client";
 
 import { useAppSelector } from "@/store/store";
-import { useEffect } from "react";
 
 function useTheme() {
   const theme = useAppSelector((state) => state.ThemeRedux);
