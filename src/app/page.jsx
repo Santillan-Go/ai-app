@@ -21,7 +21,6 @@ async function page() {
           <div className="flex justify-between pt-4 pl-4 pr-4">
             <Suspense fallback={<HeaderSqueleton />}>
               <HeaderBack />
-
               <GoToConfig />
             </Suspense>
           </div>

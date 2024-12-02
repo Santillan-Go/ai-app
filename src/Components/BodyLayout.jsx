@@ -6,9 +6,7 @@ import useTheme from "@/HOOKS/useTheme";
 function BodyLayout({ children, montserratAlternates }) {
   const Theme = useTheme();
   return (
-    <body
-      className={`${montserratAlternates.className} ${Theme.bg} h-screen-[90vh] sm:min-h-screen`}
-    >
+    <body className={`${montserratAlternates.className} ${Theme.bg}`}>
       <main>{children}</main>
     </body>
   );

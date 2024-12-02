@@ -109,7 +109,10 @@ function UserMessage({ id }) {
 
   */
   return (
-    <section className="h-[90vh] sm:h-screen p-2 pt-0 sm:pt-2 flex flex-col ">
+    <section
+      className="max-h-screen sm:h-screen p-2 pt-0 sm:pt-2 flex flex-col "
+      style={{ height: "calc(var(--vh))" }}
+    >
       <ToastContainer
         // THIS IS FIXED, SO THERE IS NOT PROBLEM WITH THIS COMPONENT
         className={

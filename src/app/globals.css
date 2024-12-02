@@ -19,6 +19,21 @@
   --main-3: #8b00ff;
 }
 
+:root {
+  --vh: 100%;
+}
+
+@supports (height: 100dvh) {
+  :root {
+    --vh: 100dvh;
+  }
+}
+
+body {
+  height: calc(var(--vh));
+  overflow: hidden;
+}
+
 @media (prefers-color-scheme: dark) {
   :root {
     --foreground-rgb: 255, 255, 255;
@@ -29,6 +44,7 @@
 html {
   scroll-behavior: smooth;
   font-size: 16px;
+  box-sizing: border-box;
 }
 body {
   align-self: auto;

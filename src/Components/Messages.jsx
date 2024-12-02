@@ -39,7 +39,7 @@ const Messages = React.memo(
       <div
         onScroll={handleScroll}
         ref={messageContainerRef}
-        className="basis-[90%] sm:basis-[90%] overflow-y-auto scrollbar-thin flex flex-col gap-16 sm:p-36 w-full"
+        className="basis-[85%] sm:basis-[90%] overflow-y-auto scrollbar-thin flex flex-col gap-16 sm:p-36 w-full"
       >
         {messages.map((message, index) => (
           <Message

@@ -1,6 +1,6 @@
 "use client";
 import React, { memo, useCallback, useState } from "react";
-
+import { Bounce, toast } from "react-toastify";
 const initialMessage = { content: "", role: "you" };
 function useMessagesNotIn() {
   const [messages, setMessages] = useState([]);
@@ -8,6 +8,7 @@ function useMessagesNotIn() {
   const [error, setError] = useState(false);
   const [showError, setshowError] = useState(false);
   const [isLoading, setisLoading] = useState(false);
+  const [Tokens, setTokens] = useState(5);
 
   // const handleResponseAI = async ({ message }) => {
   //   setMessages([...messages, message]);
@@ -55,6 +56,29 @@ function useMessagesNotIn() {
     // const message = { content: event.target.content.value, who: "you" };
     if (!messageUser.content) return;
     console.log("SUBMIT render ");
+    if (Tokens < 1) {
+      toast.error("0 Tokesn, Please Log in", {
+        position: "bottom-right",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "dark",
+        transition: Bounce,
+        bodyClassName: "bg-opacity-15",
+        // className:
+        //   "top-2 bottom-auto sm:bottom-7 sm:top-auto right-0 sm:right-2 p-0 w-full",
+      });
+
+      // return <h2 className="right-2"></h2>;
+
+      // toast("You do not have enough tokens");
+      // toast("There are not more tokens");
+      return;
+    }
+    setTokens(Tokens - 1);
     //call the api ai
     setMessageUser(initialMessage);
     //update the state
@@ -79,6 +103,7 @@ function useMessagesNotIn() {
     error,
     callAgain,
     showError,
+    Tokens,
   };
 }
 
