@@ -26,8 +26,17 @@ function useVoiceToText({ lang = "es-ES" }) {
   const recognition = new SpeechRecognition();
   recognition.lang = lang;
   recognition.continuous = true; // Keep recognizing until manually stopped
+
   recognition.interimResults = true; // Show real-time speech results
 
+  useEffect(() => {
+    if (isMobileDevice()) {
+      recognition.interimResults = false;
+    } else {
+      recognition.interimResults = true;
+    }
+  }, [IsListening]);
+  //isMobileDevice() ? false : true;
   useEffect(() => {
     console.log({ IsListening });
     // Start the recognition process when isListening is true
@@ -50,23 +59,21 @@ function useVoiceToText({ lang = "es-ES" }) {
         // Only append the final transcript to the full transcript
         if (finalTranscriptChunk) {
           setTranscript((prev) => {
-            if (!isMobileDevice()) {
-              return prev + " " + finalTranscriptChunk;
-            }
+            return prev + " " + finalTranscriptChunk;
 
-            const newTranscript = `${prev} ${finalTranscriptChunk}`.trim();
+            // const newTranscript = `${prev} ${finalTranscriptChunk}`.trim();
 
-            // Ensure no repeating words
-            const deduplicatedTranscript = newTranscript
-              .split(" ")
-              .reduce((acc, word) => {
-                if (acc[acc.length - 1] !== word) acc.push(word);
-                return acc;
-              }, [])
-              .join(" ");
-            console.log({ newTranscript });
-            console.log({ deduplicatedTranscript });
-            return deduplicatedTranscript;
+            // // Ensure no repeating words
+            // const deduplicatedTranscript = newTranscript
+            //   .split(" ")
+            //   .reduce((acc, word) => {
+            //     if (acc[acc.length - 1] !== word) acc.push(word);
+            //     return acc;
+            //   }, [])
+            //   .join(" ");
+            // console.log({ newTranscript });
+            // console.log({ deduplicatedTranscript });
+            // return deduplicatedTranscript;
           });
         }
 
