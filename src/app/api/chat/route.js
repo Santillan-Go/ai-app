@@ -29,13 +29,12 @@ export async function POST(req) {
     // console.log(summary, "summary");
     //gemini-1.5-flash
     let geminiStream;
-    if (lastMessages.length !== 0 && username) {
+    if (lastMessages.length >= 1 && username) {
       const model = genAI.getGenerativeModel({ model: "gemini-1.5-pro" });
 
-      const prompt = `todo ese array es la conversación entre tú(role:AI) y user(${username})
-      ${JSON.stringify(
+      const prompt = `${JSON.stringify(
         lastMessages
-      )}, si necesitas contexto para responder preguntas tiene el array del chat , tú eres la AI(role), enfocate en responder esto:${content},remember the user's name is ${username}. Por favor responde todo en ${language} `;
+      )}, si necesitas contexto para responder preguntas tiene el array del chat , todo ese array es la conversación entre tú(role:AI) y user(${username}),tú eres la AI(role), enfocate en responder esto:${content}. Por favor responde todo en ${language} y ademas de responder de manera clara y resumida, sin tanta información pero bien explicada`;
 
       const result = await model.generateContent(prompt);
       // console.log(result.response.text());
@@ -48,14 +47,12 @@ export async function POST(req) {
       //             lastMessages
       //           )}} tú eres la AI(role), enfocate en responder esto:${content},remember the user's name is ${username} `
       //         );
-    } else if (lastMessages.length !== 0 && !username) {
-      const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash" });
+    } else if (lastMessages.length >= 1 && !username) {
+      const model = genAI.getGenerativeModel({ model: "gemini-1.5-pro" });
 
-      const prompt = ` 
+      const prompt = `${JSON.stringify(lastMessages)},
       todo ese array es la conversación entre tú(role:AI) y user:${username}
-      ${JSON.stringify(
-        lastMessages
-      )},si necesitas contexto para responder preguntas tiene el array del chat ,tú eres la AI(role), enfocate en responder esto:${content}. Por favor responde todo en ${language}`;
+     ,si necesitas contexto para responder preguntas tiene el array del chat ,tú eres la AI(role), enfocate en responder esto:${content}. Por favor responde todo en ${language} y ademas de responder de manera clara y resumida, sin tanta información pero bien explicada`;
 
       const result = await model.generateContent(prompt);
       // console.log(result.response.text());
@@ -72,7 +69,7 @@ export async function POST(req) {
     } else if (lastMessages.length === 0 && username) {
       const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash" });
 
-      const prompt = `tú eres la AI(role), enfocate en responder esto:${content}, remember name of the user is ${username}.  Por favor responde todo en ${language}`;
+      const prompt = `tú eres la AI(role), enfocate en responder esto:${content}, recuerda el nombre del usuario:${username} solo si es necesario.  Por favor responde todo en ${language} y ademas de responder de manera clara y resumida, sin tanta información pero bien explicada`;
 
       const result = await model.generateContent(prompt);
       console.log(result.response.text());
@@ -87,7 +84,7 @@ export async function POST(req) {
     } else if (lastMessages.length === 0 || !username) {
       const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash" });
 
-      const prompt = `enfocate en responder esto: ${content}`;
+      const prompt = `enfocate en responder esto: ${content} y ademas de responder de manera clara y resumida, sin tanta información pero bien explicada`;
 
       const result = await model.generateContent(prompt);
       // console.log(result.response.text());

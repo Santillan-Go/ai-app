@@ -10,7 +10,7 @@ function MessageError({ callAgain, lastMessageOne }) {
         <p> Por favor, intente otra vez</p>
       </div>
       <button
-        onClick={(event) => callAgain({ message: lastMessageOne })}
+        onClick={(event) => callAgain({ message: lastMessageOne.content })}
         className="text-2xl w-4/5  text-white font-bold rounded-3xl p-1 bg-red-950 hover:bg-red-700 hover:text-gray-300  shadow-md shadow-red-600"
       >
         <p className=" animate-bounce"> Intentar otra vez</p>
