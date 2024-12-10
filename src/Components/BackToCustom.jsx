@@ -5,7 +5,7 @@ import { useSearchParams } from "next/navigation";
 function BackToCustom() {
   // const router = useRouter();
   const searchParams = useSearchParams();
-  console.log(searchParams.get("referrer"));
+
   const referrer = searchParams.get("referrer");
   //new URLSearchParams(router.asPath);
   const handleGoBack = () => {

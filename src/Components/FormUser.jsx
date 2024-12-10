@@ -35,6 +35,7 @@ function FormRegister() {
     if (!response.ok) {
       const json = await response.json();
       setError(json.message);
+      return;
     }
     //RENDIRE TO /auth/signin
     //const resJSON = await res.json();
@@ -179,8 +180,7 @@ export function FormLogin() {
       password: data.password,
       redirect: false,
     });
-    console.log(res);
-    console.log(res);
+
     if (res.error) {
       setError(res.error);
       return;

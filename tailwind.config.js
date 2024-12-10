@@ -7,6 +7,14 @@ module.exports = {
     "./src/ui/**/*.{js,ts,jsx,tsx,mdx}",
   ],
   theme: {
+    screens: {
+      sm: "640px",
+      md: "768px",
+      lg: "1024px",
+      xl: "1280px",
+      "2xl": "1536px",
+    },
+
     extend: {
       backgroundImage: {
         "gradient-radial": "radial-gradient(var(--tw-gradient-stops))",
@@ -87,6 +95,13 @@ module.exports = {
         "red-lg": "2px 2px 5px rgba(255, 0, 0, 0.3)",
         "white-lg": "2px 2px 5px rgb(255, 255, 255)",
         // Add more colors as needed
+      },
+      ".image-zoom": {
+        transition: "transform 0.5s ease",
+        "object-fit": "cover",
+      },
+      ".container-image:hover .image-zoom": {
+        transform: "scale(1.06)",
       },
     },
 

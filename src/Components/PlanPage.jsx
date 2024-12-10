@@ -26,7 +26,7 @@ function PlanPage() {
           .sort((a, b) => a.price - b.price)
 
           .map((plan) => (
-            <CardPlan plan={plan} spanish={spanish} />
+            <CardPlan plan={plan} spanish={spanish} key={plan.stripe_plan_id} />
           ))}
       </article>
     </section>

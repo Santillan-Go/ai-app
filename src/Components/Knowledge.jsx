@@ -45,7 +45,6 @@ function Knowledge({ tutorID, Theme, KNOWLEDGE }) {
   const [id, setID] = useState(null);
   const dispatch = useAppDispatch();
   const handleModal = (value, idIN) => {
-    console.log({ idIN });
     setIsModalOpen(!isModalOpen);
     setvalue(value);
     setID(idIN);

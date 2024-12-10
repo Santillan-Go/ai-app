@@ -39,6 +39,12 @@ const UserSchema = new Schema({
   _id: { type: String, required: true },
 });
 
+const TokensUserSchema = new Schema({
+  tokens: { type: Number, required: true },
+  userID: { type: String, required: true },
+  lastupdate: { type: String, required: true },
+});
+
 const SubscriptionSchema = new Schema({
   userID: { type: String, required: true, ref: "User" },
   planName: { type: String, required: true },
@@ -106,6 +112,9 @@ export const Subscription =
 export const PlansSubscription =
   models.PlansSubscription ||
   model("PlansSubscription", PlansSubscriptionSchema);
+
+export const TokensUser =
+  models.TokensUser || model("TokensUser", TokensUserSchema);
 
 /*
 https://photos.fife.usercontent.google.com/pw/AP1GczMtAuqlPOqScL5qkmftnQ3EjKNXt5XWmT6_k62aHIeEPfoVgWk9bG8=w233-h232-s-no-gm?authuser=0  

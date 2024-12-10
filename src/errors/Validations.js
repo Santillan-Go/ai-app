@@ -154,3 +154,9 @@ export const validatePlan = ({
     throw new ValidationError("Is new is required");
   }
 };
+
+export const ValidateFoundUser = ({ user }) => {
+  if (!user) {
+    throw new ValidateFound("User not found");
+  }
+};

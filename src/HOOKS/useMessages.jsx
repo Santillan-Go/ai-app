@@ -4,7 +4,7 @@ import { newmessages } from "@/store/apiCalls";
 import { useCallback, useEffect, useRef, useState } from "react";
 import { useDispatch } from "react-redux";
 
-import { useAppSelector } from "@/store/store";
+import { useAppDispatch, useAppSelector } from "@/store/store";
 import { useSession } from "next-auth/react";
 import useVoiceToText from "./useVoiceToText";
 import useTextFromImage from "./useTextFromImage";
@@ -12,6 +12,8 @@ import { autoResize } from "@/Components/FormMessage";
 import useValidatePlan from "./useValidatePlan";
 import { Bounce, toast } from "react-toastify";
 import useLanguage from "./useLanguage";
+import { updateTokensByOne } from "@/store/userRedux";
+import useClipboard from "./useClipboard";
 function useMessages({ id, lastMessages }) {
   const { data: session, status } = useSession();
 
@@ -25,7 +27,9 @@ function useMessages({ id, lastMessages }) {
   const [showError, setShowError] = useState(false);
   const ref = useRef(null);
   const [cursor, setCursor] = useState(0);
-  const [Tokens, setTokens] = useState(10);
+  // const [Tokens, setTokens] = useState(10);
+  const Tokens = useAppSelector((state) => state.userRedux.tokens);
+  const dispatch = useAppDispatch();
   const { money } = useValidatePlan();
   const { languageName, spanish } = useLanguage();
   //console.log(all);
@@ -41,8 +45,9 @@ function useMessages({ id, lastMessages }) {
   });
 
   const { loadingText, resetText, setImage, text } = useTextFromImage();
+  const { clipboard, hiddeBoard, showBoard } = useClipboard();
 
-  const dispatch = useDispatch();
+  //const dispatch = useDispatch();
 
   const handleResponseAI = useCallback(
     async ({ message }) => {
@@ -114,7 +119,9 @@ function useMessages({ id, lastMessages }) {
           // toast("There are not more tokens");
           return;
         }
-        setTokens(Tokens - 1);
+        //CALL FUNCTION
+        dispatch(updateTokensByOne());
+        //   setTokens(Tokens - 1);
       }
       setInput("");
       if (ref.current) {
@@ -126,6 +133,7 @@ function useMessages({ id, lastMessages }) {
         id,
         message: { role: "you", content: input },
         userID,
+        money,
       });
       await callAI({ message: input });
       // setMessage({ ...message, content: "" });
@@ -136,7 +144,49 @@ function useMessages({ id, lastMessages }) {
     [input, dispatch, id, userID, callAI]
   );
 
-  const restarTokens = () => setTokens(10);
+  const SendByClipBoard = async ({ prompt }) => {
+    if (clipboard) {
+      if (!money) {
+        if (Tokens < 1) {
+          toast.error(" You don't have enough tokens", {
+            position: "bottom-right",
+            autoClose: 5000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+            theme: "dark",
+            transition: Bounce,
+            bodyClassName: "bg-opacity-15",
+            // className:
+            //   "top-2 bottom-auto sm:bottom-7 sm:top-auto right-0 sm:right-2 p-0 w-full",
+          });
+
+          // return <h2 className="right-2"></h2>;
+
+          // toast("You do not have enough tokens");
+          // toast("There are not more tokens");
+          return;
+        }
+        //CALL FUNCTION
+        dispatch(updateTokensByOne());
+        //   setTokens(Tokens - 1);
+      }
+
+      await newmessages({
+        dispatch,
+        id,
+        message: { role: "you", content: `${prompt}:${clipboard}` },
+        userID,
+        money,
+      });
+      hiddeBoard();
+      await callAI({ message: `${prompt}:${clipboard}` });
+    }
+  };
+
+  //const restarTokens = () => setTokens(10);
 
   const Change = useCallback(
     (event) => {
@@ -152,12 +202,6 @@ function useMessages({ id, lastMessages }) {
     },
     [IsListening, handleTyping]
   );
-  useEffect(() => {
-    console.log({ input });
-  }, [input]);
-  useEffect(() => {
-    console.log({ transcript });
-  }, [transcript]);
 
   useEffect(() => {
     // console.log(ref);
@@ -214,6 +258,10 @@ function useMessages({ id, lastMessages }) {
     setImage,
     text,
     Tokens,
+    SendByClipBoard,
+    clipboard,
+    hiddeBoard,
+    showBoard,
   };
 }
 

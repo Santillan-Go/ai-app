@@ -10,6 +10,8 @@ const {
   createPlanSubcription,
   deleteAllTutors,
   deleteAllMessages,
+  createTokensUser,
+  deleteAllSubscriptions,
 } = require("@/lib/userRequest");
 const { NextResponse } = require("next/server");
 
@@ -30,8 +32,14 @@ export const POST = async (req) => {
       );
     }
     const newUser = await createUser({ username, email, password, _id });
+    console.log({ newUser });
+
+    //CREATE THE TOKENS
+    const createdTokens = await createTokensUser({ userID: _id });
+    console.log({ createdTokens });
 
     const planUser = await createPlanSubcription({ userID: _id });
+    console.log({ planUser });
 
     return NextResponse.json(newUser, { status: 201 }); // Created successfully
   } catch (error) {
@@ -61,6 +69,8 @@ export const DELETE = async () => {
     const allOnes = await deleteAllUsers();
     await deleteAllTutors();
     await deleteAllMessages();
+    await deleteAllSubscriptions();
+
     return NextResponse.json(allOnes);
   } catch (error) {
     return NextResponse.json({ message: error.message });

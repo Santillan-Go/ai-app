@@ -6,6 +6,7 @@ import {
   updateEndDate,
   updatePlanName,
   updateSubID,
+  updateTokens,
   updateUsername,
 } from "@/store/userRedux";
 
@@ -31,16 +32,16 @@ function GetInfoUser() {
   */
   const GetUser = async () => {
     const result = await getUserByID({ userID });
+
     dispatch(updateUsername({ username: result.username }));
     dispatch(updatePlanName({ planName: result.planName }));
 
     dispatch(updateEndDate({ endDate: result.endDate }));
     dispatch(updateSubID({ subID: result.subID }));
     dispatch(updateActive({ active: result.active }));
-
+    dispatch(updateTokens({ tokens: result.tokens }));
     //UPDATE THE STATE
     //SET A GLOBAL LOADING STATE TO SHOW THE SKELETON
-    console.log(result);
   };
   useEffect(() => {
     if (userID) {

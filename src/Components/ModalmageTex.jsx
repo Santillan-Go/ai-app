@@ -56,7 +56,7 @@ const ModalmageText = forwardRef(function ModalmageText({
                   disabled={!imgSrc}
                   onChange={(e) => {
                     const value = e.target.value;
-                    console.log({ value });
+
                     // Allow empty or partial values like "0."
                     if (value === "" || /^(\d+(\.\d{0,9})?)?$/.test(value)) {
                       const numericValue = Number(value);

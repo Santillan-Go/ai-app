@@ -16,6 +16,7 @@ import {
   REGISTER,
 } from "redux-persist";
 import storage from "redux-persist/lib/storage";
+import { PropmtsRedux } from "./promptClip";
 
 // Persist configuration for userReducer
 const userPersistConfig = {
@@ -36,12 +37,20 @@ const languagePersistConfig = {
   version: 1,
   storage,
 };
+
+const promptPersistConfig = {
+  key: "prompt", // Unique key for the theme reducer
+  version: 1,
+  storage,
+};
+
 // Combine all reducers, persist only selected ones
 const rootReducer = combineReducers({
   userRedux: persistReducer(userPersistConfig, userRedux), // Persist userRedux
   ThemeRedux: persistReducer(themePersistConfig, ThemeRedux), // Persist ThemeRedux
   ContentLanguage: persistReducer(languagePersistConfig, ContentLanguage), // Do not persist this reducer
-  MessagesReducer, // Do not persist this reducer
+  MessagesReducer, //
+  PropmtsRedux: persistReducer(promptPersistConfig, PropmtsRedux), // Do not persist this reducer
 });
 
 // Configure the store

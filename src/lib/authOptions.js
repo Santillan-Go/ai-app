@@ -84,8 +84,6 @@ const authOptions = {
       // Add user information to the token
     },
     session({ session, user, token }) {
-      console.log(session, "SESSION");
-
       return {
         ...session,
         user: {

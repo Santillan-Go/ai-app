@@ -26,15 +26,15 @@ function CardTeacher({ id, name, image }) {
           Theme.theme === "dark mode"
             ? `${Theme.children}`
             : "bg-gray-light bg-opacity-15 backdrop-blur-md border border-white-10"
-        } w-full h-full p-1 sm:p-4 rounded-lg shadow-md overflow-hidden`}
+        } w-full h-full p-1 sm:p-4 rounded-lg shadow-md overflow-hidden group`}
       >
         <img
-          className="object-cover w-full h-32 rounded-t-lg rounded-b-lg sm:image-zoom "
+          className="object-cover w-full h-32 rounded-t-lg rounded-b-lg  sm:group-hover:scale-[1.06] transition-all duration-500 ease-in-out "
           src={image}
           alt=""
         />
 
-        <p className="font-semibold text-16px sm:text-20px text-center title-card">
+        <p className="font-semibold text-16px sm:text-20px text-center sm:group-hover:mt-2 transition-all duration-500 ease-in-out">
           {name}
         </p>
       </div>

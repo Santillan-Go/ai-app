@@ -6,6 +6,7 @@ const initial = {
   endDate: "",
   subID: "",
   active: "",
+  tokens: 0,
 };
 
 const userSlice = createSlice({
@@ -27,6 +28,14 @@ const userSlice = createSlice({
     updateActive(state, action) {
       state.active = action.payload.active;
     },
+    updateTokens(state, action) {
+      state.tokens = action.payload.tokens;
+    },
+    updateTokensByOne(state, action) {
+      if (state.tokens >= 1) {
+        state.tokens -= 1;
+      }
+    },
   },
 });
 
@@ -36,6 +45,8 @@ export const {
   updateEndDate,
   updateSubID,
   updateActive,
+  updateTokensByOne,
+  updateTokens,
 } = userSlice.actions;
 
 export const userRedux = userSlice.reducer;

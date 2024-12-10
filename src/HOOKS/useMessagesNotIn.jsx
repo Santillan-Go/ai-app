@@ -19,12 +19,12 @@ function useMessagesNotIn() {
   //use the hook memo
 
   const callAgain = async ({ message }) => {
-    console.log("callAgain render ");
+    //  console.log("callAgain render ");
     setError(false);
     await callAI({ message: message.content });
   };
   const callAI = async ({ message }) => {
-    console.log("callAI render ");
+    //console.log("callAI render ");
     setisLoading(!isLoading);
     const res = await fetch("/api/chat", {
       method: "POST",
@@ -44,7 +44,7 @@ function useMessagesNotIn() {
     const data = await res.json();
 
     // SAVE RESPONSE'S AI IN DB
-    console.log(data);
+    //console.log(data);
     //  setMessages([...messages, data]);
     setMessages((prevMessages) => [...prevMessages, data]);
     // await handleResponseAI({ message: data });
@@ -55,7 +55,7 @@ function useMessagesNotIn() {
     event.preventDefault();
     // const message = { content: event.target.content.value, who: "you" };
     if (!messageUser.content) return;
-    console.log("SUBMIT render ");
+    //  console.log("SUBMIT render ");
     if (Tokens < 1) {
       toast.error("0 Tokesn, Please Log in", {
         position: "bottom-right",

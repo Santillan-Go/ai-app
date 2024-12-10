@@ -36,9 +36,9 @@ function UseImageCrop() {
       const reader = new FileReader();
       reader.addEventListener("load", () => {
         setImgSrc(reader.result?.toString() || "");
-        console.log({ src: reader.result?.toString() || "" });
+       // console.log({ src: reader.result?.toString() || "" });
       });
-      console.log({ url: e.target.files[0] });
+     // console.log({ url: e.target.files[0] });
       reader.readAsDataURL(e.target.files[0]);
     }
   }

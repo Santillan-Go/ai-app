@@ -6,7 +6,7 @@ import {
 } from "./messagesRedux";
 import { updateUsername } from "./userRedux";
 
-export const newmessages = async ({ dispatch, id, message, userID }) => {
+export const newmessages = async ({ dispatch, id, message, userID, money }) => {
   dispatch(newMessage({ id, message }));
 
   //here when ai response, update the state
@@ -21,6 +21,7 @@ export const newmessages = async ({ dispatch, id, message, userID }) => {
       chatID: id,
       content: message.content,
       role: message.role,
+      money,
     }),
   });
 

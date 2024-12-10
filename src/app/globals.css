@@ -784,15 +784,18 @@ html {
   -moz-osx-font-smoothing: grayscale;
   overflow-x: hidden;
 }
+/*
 
 .container-image:hover .image-zoom {
-  transform: scale(1.06); /* Zoom in effect */
+  transform: scale(1.06);  Zoom in effect
 }
 
 .image-zoom {
-  transition: transform 0.5s ease; /* Smooth zoom animation */
-  object-fit: cover; /* Keep image covering the container */
+  transition: transform 0.5s ease; 
+  object-fit: cover; 
 }
+
+*/
 
 .container-image:hover .title-card {
   margin-top: 0.5rem;
@@ -1121,4 +1124,35 @@ input[type="number"] {
 
 .father_card {
   overflow-wrap: break-word;
+}
+
+.btn-drag:hover {
+  cursor: grab;
+}
+.dragging:hover {
+  cursor: grabbing;
+}
+
+.dropzone {
+  width: 300px;
+  padding: 10px;
+  border: 2px dashed #ccc;
+  margin: 20px;
+}
+
+.draggable {
+  margin: 10px 0;
+  padding: 10px;
+  background-color: #f0f0f0;
+  cursor: grab;
+  transition: background-color 0.2s ease;
+}
+
+.draggable.dragging {
+  opacity: 0.5;
+  background-color: #ccc;
+  cursor: grabbing;
+}
+draggable {
+  cursor: grab;
 }

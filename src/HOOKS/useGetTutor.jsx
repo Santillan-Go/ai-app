@@ -23,7 +23,7 @@ function useGetTutor({ _id }) {
 
   useEffect(() => {
     const foundTutor = teachers.find((tutor) => tutor._id === _id);
-    console.log(foundTutor, "I FOUND IT!!!");
+    //console.log(foundTutor, "I FOUND IT!!!");
     if (!foundTutor) {
       //make a request
 

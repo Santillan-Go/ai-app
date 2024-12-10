@@ -17,7 +17,7 @@ function useVoiceToText({ lang = "es-ES" }) {
     // Check for mobile keywords
     return /android|iphone|ipad|ipod|windows phone|mobile/i.test(userAgent);
   }
-  console.log({ mobio: isMobileDevice() });
+  //console.log({ mobio: isMobileDevice() });
 
   // // Check if the browser supports the SpeechRecognition API
   const SpeechRecognition =
@@ -38,7 +38,7 @@ function useVoiceToText({ lang = "es-ES" }) {
   }, [IsListening]);
   //isMobileDevice() ? false : true;
   useEffect(() => {
-    console.log({ IsListening });
+    //console.log({ IsListening });
     // Start the recognition process when isListening is true
     if (IsListening) {
       recognition.start();

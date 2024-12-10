@@ -2,7 +2,7 @@
 
 import AddIcon from "@mui/icons-material/Add";
 import RemoveIcon from "@mui/icons-material/Remove";
-import React, { forwardRef, useEffect } from "react";
+import React, { forwardRef } from "react";
 
 const BothButtonsScale = forwardRef(function BothButtonsScale({
   handleScale,
@@ -11,9 +11,6 @@ const BothButtonsScale = forwardRef(function BothButtonsScale({
   imgSrc,
   isMouseDown,
 }) {
-  useEffect(() => {
-    console.log({ isMouseDown: isMouseDown.current });
-  }, [isMouseDown]);
   return (
     <section className="both-buttons-scale">
       <button

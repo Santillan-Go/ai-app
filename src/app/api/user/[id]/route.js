@@ -1,11 +1,13 @@
-import { ValidationError } from "@/errors/error";
+import { ValidateFound, ValidationError } from "@/errors/error";
 import { validateId } from "@/errors/Validations";
 import dbConnect from "@/lib/MongoDB";
+import { restarTokens } from "@/lib/restarTokens";
 import {
   deleteMessagesByUserID,
   deleteTutorByUserID,
   deleteUserByID,
   getSubscriptionsByIdUser,
+  getTokensUser,
   getUserByID,
   updateUsername,
   updateUserSubcription,
@@ -19,10 +21,6 @@ export const GET = async (req, { params }) => {
     await dbConnect();
     validateId({ id, message: "id is required" });
     const found = await getUserByID({ userID: id });
-
-    if (!found) {
-      return NextResponse.json({ message: "User not found" }, { status: 404 });
-    }
     const subcriptionUser = await getSubscriptionsByIdUser({ userID: id });
     const userFound = {
       username: found._doc.username,
@@ -52,9 +50,8 @@ export const GET = async (req, { params }) => {
         endDate: "never",
       });
     }
-    ///IF ACTIVE IS FALSE AND START AND END DATE COINCIDE UPDATE THE  DB
-    /// SEE WHAT DATA I'M SAVING
-    return NextResponse.json({
+
+    const responseObject = {
       ...userFound,
 
       planName: subcriptionUser.planName,
@@ -62,17 +59,41 @@ export const GET = async (req, { params }) => {
       subID: subcriptionUser.subID,
       endDate: subcriptionUser.endDate,
       active: subcriptionUser.active,
+    };
+
+    const tokens = await restarTokens({
+      planName: subcriptionUser.planName,
+      userID: id,
     });
+    if (tokens) {
+      responseObject.tokens = tokens.tokens;
+    }
+
+    if (!responseObject.tokens) {
+      const tokens = await getTokensUser({ userID: id });
+      responseObject.tokens = tokens.tokens;
+    }
+    //IF PLANNAME===Free
+    //UPDATE TOKENS IF IT'S NEXT DAY
+
+    ///IF ACTIVE IS FALSE AND START AND END DATE COINCIDE UPDATE THE  DB
+    /// SEE WHAT DATA I'M SAVING
+    return NextResponse.json(responseObject);
   } catch (error) {
     if (error instanceof ValidationError) {
       return NextResponse.json({ message: error.message }, { status: 400 });
+    }
+
+    if (error instanceof ValidateFound) {
+      return NextResponse.json({ message: error.message }, { status: 404 });
     }
     return NextResponse.json({ message: error.message }, { status: 500 });
   }
 };
 
-export const PUT = async (req, { params: { id } }) => {
+export const PUT = async (req, { params }) => {
   const { username } = await req.json();
+  const { id } = await params;
   try {
     await dbConnect();
     validateId({ id, message: "id is required" });
@@ -87,7 +108,8 @@ export const PUT = async (req, { params: { id } }) => {
   }
 };
 
-export const DELETE = async (req, { params: { id } }) => {
+export const DELETE = async (req, { params }) => {
+  const { id } = await params;
   try {
     await dbConnect();
     validateId({ id, message: "id is required" });

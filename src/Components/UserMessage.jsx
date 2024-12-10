@@ -17,6 +17,8 @@ import useValidatePlan from "@/HOOKS/useValidatePlan";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { useNotificationCenter } from "react-toastify/addons/use-notification-center";
+import PromptClipBoard from "./PromptClipBoard";
+import ModalPrompts from "./ModalPrompts";
 //create an array of messages
 
 function UserMessage({ id }) {
@@ -48,14 +50,19 @@ function UserMessage({ id }) {
     IsListening,
     loadingText,
     resetText,
+    SendByClipBoard,
+    clipboard,
     setImage,
     text,
     Tokens,
+    hiddeBoard,
+    showBoard,
   } = useMessages({
     id,
     lastMessages,
   });
 
+  const [showModal, setShowModal] = useState(false);
   //----------------
   // // Scroll to the bottom function
 
@@ -108,10 +115,15 @@ function UserMessage({ id }) {
   "flex justify-between basis-[5%] sm:basis-auto bg-red-500
 
   */
+
+  const handleShowModal = () => {
+    setShowModal(!showModal);
+  };
+
   return (
     <section
       className="max-h-screen sm:h-screen p-2 pt-0 sm:pt-2 flex flex-col "
-      style={{ height: "calc(var(--vh))" }}
+      style={{ height: "calc(var(--vh)) " }}
     >
       <ToastContainer
         // THIS IS FIXED, SO THERE IS NOT PROBLEM WITH THIS COMPONENT
@@ -119,6 +131,7 @@ function UserMessage({ id }) {
           "w-[90%] ml-auto mr-auto   sm:w-[320px] bottom-auto  sm:bottom-12 left-1/2 translate-x-[-50%]  sm:left-auto sm:top-auto sm:right-2 top-2    sm:p-4 p-2 gap-2 absolute  flex flex-col h-4/5 items-center sm:flex-col-reverse"
         }
       />
+
       <div className="flex-none h-[5%] flex justify-between sm:basis-auto ">
         <BackTo LINK={`/teacher/${id}`} />
         {money ? <div></div> : <TokensChat Tokens={Tokens} />}
@@ -143,7 +156,6 @@ function UserMessage({ id }) {
       ) : (
         <GreetingUser />
       )}
-
       {showScrollButton && <BtnGoToBottom scrollToBottom={scrollToBottom} />}
       <ModalmageText
         accept={accept}
@@ -170,6 +182,15 @@ function UserMessage({ id }) {
         onImageLoad={onImageLoad}
         setImage={setImage}
       />
+      {clipboard && showBoard && (
+        <PromptClipBoard
+          SendByClipBoard={SendByClipBoard}
+          clipboard={clipboard}
+          hiddeBoard={hiddeBoard}
+          handleShowModal={handleShowModal}
+        />
+      )}
+      {showModal && <ModalPrompts handleClose={handleShowModal} />}
       <FormMessage
         id={id}
         Change={Change}

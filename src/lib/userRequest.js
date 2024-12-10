@@ -1,5 +1,12 @@
+import { ValidateFoundUser } from "@/errors/Validations";
 import dbConnect from "./MongoDB";
-import { User, MessagesGlobal, TutorsGlobal, Subscription } from "./Schema";
+import {
+  User,
+  MessagesGlobal,
+  TutorsGlobal,
+  Subscription,
+  TokensUser,
+} from "./Schema";
 
 //GET-READ
 
@@ -7,8 +14,9 @@ export const getUserByID = async ({ userID }) => {
   const foundOne = await User.findOne({
     _id: userID,
   });
-
-  return foundOne ? foundOne : false;
+  ValidateFoundUser({ user: foundOne });
+  return foundOne;
+  // return foundOne ? foundOne : false;
 };
 
 export const getAllUsers = async () => {
@@ -59,6 +67,11 @@ export const getSubscriptionsByIdUser = async ({ userID }) => {
 export const getSubscriptionsUser = async () => {
   const allUsers = await Subscription.find();
   return allUsers;
+};
+
+export const getTokensUser = async ({ userID }) => {
+  const userTokens = await TokensUser.findOne({ userID });
+  return userTokens;
 };
 //CREATE
 export const createNewTutor = async ({
@@ -135,6 +148,16 @@ export const createUser = async ({ username, email, password, _id }) => {
   return response;
 };
 
+export const createTokensUser = async ({ userID }) => {
+  const lastupdate = new Date().toLocaleDateString();
+  const tokencreated = await TokensUser.create({
+    userID,
+    tokens: 10,
+    lastupdate,
+  });
+  return tokencreated;
+};
+
 export const registerUserWithOutPassword = async ({ email, username, _id }) => {
   await dbConnect();
   const userFound = await User.findOne({
@@ -150,9 +173,14 @@ export const registerUserWithOutPassword = async ({ email, username, _id }) => {
       // optional if password is not required
     });
     const response = await newOne.save();
-    await createPlanSubcription({ userID: _id });
+    console.log({ response });
+    const newPLan = await createPlanSubcription({ userID: _id });
+    console.log({ newPLan });
 
-    console.log(response, "NEW ONE");
+    const newToken = await createTokensUser({ userID: _id });
+    console.log({ newToken });
+
+    // console.log(response, "NEW ONE");
     return { ...response, user: true };
   } else {
     return { message: "User already exits", user: true };
@@ -199,7 +227,7 @@ export const createPlanSubcription = async ({ userID }) => {
       startDate: "never",
       endDate: "never",
     });
-    console.log(newPlanSub);
+    console.log({ newPlanSub });
   } catch (error) {
     console.log({ messagError: error.message });
   }
@@ -291,7 +319,50 @@ export const updateUsername = async ({ userID, username }) => {
 
   return updatedName;
 };
+///RESTAR
+export const updateTokensUser = async ({ userID }) => {
+  const newDate = new Date().toLocaleDateString();
+  const userFound = await TokensUser.findOne({ userID });
 
+  if (userFound && userFound.lastupdate !== newDate) {
+    console.log({ say: "MAKING_CHANGES_TOKENSS" });
+    const tokencreated = await TokensUser.updateOne(
+      {
+        userID,
+      },
+      {
+        $set: {
+          tokens: 10,
+          lastupdate: newDate,
+        },
+      }
+    );
+
+    return 10;
+  }
+};
+
+//CALL THIS WHEN THE USER SAVE A MESSAGE------
+export const updateTokensByOne = async ({ userID }) => {
+  ///GET NUMBER OF TOKENS AVAILEBLES
+  const userTokens = await TokensUser.findOne({ userID });
+  console.log({ tokensFound: userTokens });
+  //CHECK AND VALIDATE
+  console.log({ updating: true });
+  if (userTokens.tokens >= 1) {
+    await TokensUser.updateOne(
+      {
+        userID,
+      },
+      {
+        $set: {
+          tokens: userTokens.tokens - 1,
+        },
+      }
+    );
+  }
+  //UPDATE IF IT'S NECESARY
+};
 //DELETE
 
 export const deleteUserByID = async ({ userID }) => {
@@ -344,4 +415,8 @@ export const deleteAllTutors = async () => {
 export const deleteAllMessages = async () => {
   const deletedAllMessages = await MessagesGlobal.deleteMany();
   return deletedAllMessages;
+};
+export const deleteAllSubscriptions = async () => {
+  const deletedAllSubs = await Subscription.deleteMany();
+  return deletedAllSubs;
 };

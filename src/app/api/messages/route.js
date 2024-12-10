@@ -1,12 +1,12 @@
 import { ValidationError } from "@/errors/error";
 import { validateChat } from "@/errors/Validations";
 import dbConnect from "@/lib/MongoDB";
-import { createNewMessagesGlobal } from "@/lib/userRequest";
+import { createNewMessagesGlobal, updateTokensByOne } from "@/lib/userRequest";
 
 const { NextResponse } = require("next/server");
 
 export const POST = async (req, { params }) => {
-  const { userID, chatID, content, role } = await req.json();
+  const { userID, chatID, content, role, money } = await req.json();
   try {
     await dbConnect();
     validateChat({ userID, chatID, content, role });
@@ -16,7 +16,11 @@ export const POST = async (req, { params }) => {
       content,
       role,
     });
-
+    console.log({ money, role });
+    if (!money && role === "you") {
+      await updateTokensByOne({ userID });
+    }
+    //await updateTokensByOne({userID});
     return NextResponse.json(newMessageUser);
   } catch (error) {
     console.error(error, "ERROR");
