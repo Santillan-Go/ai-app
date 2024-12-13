@@ -21,18 +21,9 @@ function UserNotLogIn() {
     showError,
   } = useMessagesNotIn();
 
-  useEffect(() => {
-    function setVhProperty() {
-      const vh = window.innerHeight * 0.01;
-      document.documentElement.style.setProperty("--vh", `${vh}px`);
-    }
-
-    window.addEventListener("resize", setVhProperty);
-    window.addEventListener("load", setVhProperty);
-  }, []);
   return (
     <section
-      className="h-screen w-full flex flex-col justify-between p-2"
+      className="max-h-screen sm:h-screen w-full flex flex-col justify-between p-2"
       style={{ height: "calc(var(--vh))" }}
     >
       <ToastContainer
