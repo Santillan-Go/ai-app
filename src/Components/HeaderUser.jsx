@@ -39,7 +39,10 @@ function HeaderUser() {
   // }, [name]);
   const nameSplit = (name) => {
     const cut = name.split(" ");
-
+    //but what if the name is just one word?
+    if (cut.length === 1) {
+      return cut[0];
+    }
     return `${cut[0]} ${cut[1]}`;
   };
   /*

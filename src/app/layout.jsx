@@ -25,6 +25,12 @@ export default async function RootLayout({ children }) {
   return (
     <html lang="en">
       <head>
+        <link
+          rel="icon"
+          href="/robot-teacher.jpg"
+          type="image/jpg"
+          sizes="16x16"
+        />
         <script
           async
           src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6335035765993896"
