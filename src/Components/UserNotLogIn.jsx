@@ -22,16 +22,14 @@ function UserNotLogIn() {
   } = useMessagesNotIn();
 
   return (
-    <section
-      className="max-h-screen sm:h-screen w-full flex flex-col justify-between p-2"
-      style={{ height: "calc(var(--vh))" }}
-    >
+    <section className="max-h-screen sm:h-screen w-full flex flex-col justify-between p-2">
       <ToastContainer
         // THIS IS FIXED, SO THERE IS NOT PROBLEM WITH THIS COMPONENT
         className={
           "w-[90%] ml-auto mr-auto   sm:w-[320px] bottom-auto  sm:bottom-12 left-1/2 translate-x-[-50%]  sm:left-auto sm:top-auto sm:right-2 top-2    sm:p-4 p-2 gap-2 absolute  flex flex-col h-4/5 items-center sm:flex-col-reverse"
         }
       />
+
       <div className="basis-[5%] sm:basis-auto flex  gap-4  justify-between">
         <h2 className="font-bold text-xl text-center ">Tokens:{Tokens}</h2>
         <div className=" justify-content-end">

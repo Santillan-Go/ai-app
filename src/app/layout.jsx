@@ -25,6 +25,8 @@ export default async function RootLayout({ children }) {
   return (
     <html lang="en">
       <head>
+
+
         <link
           rel="icon"
           href="/robot-teacher.jpg"
@@ -52,6 +54,7 @@ export default async function RootLayout({ children }) {
           <ReduxProvider>{children}</ReduxProvider>
         </main>
       </body> */}
+   
     </html>
   );
 }
