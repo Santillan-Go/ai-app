@@ -5,67 +5,30 @@ export async function POST(req) {
   //YOU CAN CREATE ANOTHER EXAMPLE WHERE YOU PASS THE ARRAY TO THE AI JUST TO REMEMBER
   const genAI = new GoogleGenerativeAI(process.env.GOOGLE_API_KEY || "");
   try {
-    // Extract the `prompt` from the body of the request
     const { content, lastMessages, username, language } = await req.json();
     console.log({ username });
-    // console.log(lastMessages, "lastmessages");
     console.log(content, "content");
-
-    //CREATE SUMMARIZE
-    // let summary;
-
-    // if (lastMessages.length !== 0) {
-    //   console.log("NOTHING, RIGH???");
-    //   const summarizeResult = await genAI
-    //     .getGenerativeModel({ model: "gemini-1.5-flash" })
-    //     .generateContentStream(
-    //       `Please create a summary of the following conversation history. Focus on the key details that would help in continuing the conversation contextually in the future. Ensure that the user identity, their goals, and important facts are retained: ${JSON.stringify(
-    //         lastMessages
-    //       )}, remember the user's name is carlos`
-    //     );
-    //   summary = (await summarizeResult.response).text();
-    // }
-
-    // console.log(summary, "summary");
-    //gemini-1.5-flash
     let geminiStream;
     if (lastMessages.length >= 1 && username) {
-      const model = genAI.getGenerativeModel({ model: "gemini-1.5-pro" });
+      const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash" });
 
       const prompt = `${JSON.stringify(
         lastMessages
       )}, si necesitas contexto para responder preguntas tiene el array del chat , todo ese array es la conversación entre tú(role:AI) y user(${username}),tú eres la AI(role), enfocate en responder esto:${content}. Por favor responde todo en ${language} y ademas de responder de manera clara y resumida, sin tanta información pero bien explicada`;
 
       const result = await model.generateContent(prompt);
-      // console.log(result.response.text());
 
       geminiStream = result.response.text();
-      //       geminiStream = await genAI
-      //         .getGenerativeModel({ model: "gemini-1.5-flash", tools: {} })
-      //         .generateContentStream(
-      //           ` si necesitas contexto para responder preguntas aquí está:${JSON.stringify(
-      //             lastMessages
-      //           )}} tú eres la AI(role), enfocate en responder esto:${content},remember the user's name is ${username} `
-      //         );
     } else if (lastMessages.length >= 1 && !username) {
-      const model = genAI.getGenerativeModel({ model: "gemini-1.5-pro" });
+      const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash" });
 
       const prompt = `${JSON.stringify(lastMessages)},
       todo ese array es la conversación entre tú(role:AI) y user:${username}
      ,si necesitas contexto para responder preguntas tiene el array del chat ,tú eres la AI(role), enfocate en responder esto:${content}. Por favor responde todo en ${language} y ademas de responder de manera clara y resumida, sin tanta información pero bien explicada`;
 
       const result = await model.generateContent(prompt);
-      // console.log(result.response.text());
 
       geminiStream = result.response.text();
-
-      // geminiStream = await genAI
-      //   .getGenerativeModel({ model: "gemini-1.5-flash" })
-      //   .generateContentStream(
-      //     ` si necesitas contexto para responder preguntas aquí está:${JSON.stringify(
-      //       lastMessages
-      //     )}} tú eres la AI(role), enfocate en responder esto:${content} `
-      //   );
     } else if (lastMessages.length === 0 && username) {
       const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash" });
 
@@ -75,28 +38,16 @@ export async function POST(req) {
       console.log(result.response.text());
 
       geminiStream = result.response.text();
-
-      // geminiStream = await genAI
-      //   .getGenerativeModel({ model: "gemini-1.5-flash" })
-      //   .generateContentStream(
-      //     `${content}, remember name of the user is ${username}`
-      //   );
     } else if (lastMessages.length === 0 || !username) {
       const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash" });
 
       const prompt = `enfocate en responder esto: ${content} y ademas de responder de manera clara y resumida, sin tanta información pero bien explicada`;
 
       const result = await model.generateContent(prompt);
-      // console.log(result.response.text());
 
       geminiStream = result.response.text();
-      // geminiStream = await genAI
-      //   .getGenerativeModel({ model: "gemini-1.5-flash" })
-      //   .generateContentStream(`${content}`);
     }
 
-    //  const text = (geminiStream.response.te).text();
-    // console.log({ text });
     return NextResponse.json({ content: geminiStream, role: "AI" });
   } catch (error) {
     console.error(error, "ERROR");
@@ -106,6 +57,24 @@ export async function POST(req) {
     );
   }
 }
+
+//CREATE SUMMARIZE
+// let summary;
+
+// if (lastMessages.length !== 0) {
+//   console.log("NOTHING, RIGH???");
+//   const summarizeResult = await genAI
+//     .getGenerativeModel({ model: "gemini-1.5-flash" })
+//     .generateContentStream(
+//       `Please create a summary of the following conversation history. Focus on the key details that would help in continuing the conversation contextually in the future. Ensure that the user identity, their goals, and important facts are retained: ${JSON.stringify(
+//         lastMessages
+//       )}, remember the user's name is carlos`
+//     );
+//   summary = (await summarizeResult.response).text();
+// }
+
+// console.log(summary, "summary");
+//gemini-1.5-flash
 
 // REMEMBER WITH SUMMARIZE
 // export async function POST(req) {
